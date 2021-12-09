@@ -3,7 +3,7 @@
 This is a simple `REST` api that is served to classify `pneumonia` given an X-ray image of a chest of a human being. The following are expected results when the model does it's classification.
 
 1. pneumonia bacteria
-2. pneumonia - virus
+2. pneumonia virus
 3. normal
 
 <p align="center" with="100%"><img src="/images/pneumonia.jpg" width="100%" alt=""/>
@@ -140,22 +140,29 @@ The expected response at `http://localhost:3001/api/pneumonia` with a file `imag
 ```json
 {
   "predictions": {
-    "class_label": "PNEUMONIA BACTERIA",
-    "label": 1,
+    "class_label": "PNEUMONIA VIRAL",
+    "label": 2,
+    "meta": {
+      "description": "given a medical chest-x-ray image of a human being we are going to classify weather a person have pneumonia virus, pneumonia bacteria or none of those(normal).",
+      "language": "python",
+      "library": "pytorch",
+      "main": "computer vision (cv)",
+      "programmer": "@crispengari"
+    },
     "predictions": [
-      { "class_label": "NORMAL", "label": 0, "probability": 0.0 },
+      {
+        "class_label": "NORMAL",
+        "label": 0,
+        "probability": 0.15000000596046448
+      },
       {
         "class_label": "PNEUMONIA BACTERIA",
         "label": 1,
-        "probability": 0.6299999952316284
+        "probability": 0.10000000149011612
       },
-      {
-        "class_label": "PNEUMONIA VIRAL",
-        "label": 2,
-        "probability": 0.36000001430511475
-      }
+      { "class_label": "PNEUMONIA VIRAL", "label": 2, "probability": 0.75 }
     ],
-    "probability": 0.6299999952316284
+    "probability": 0.75
   },
   "success": true
 }
@@ -188,20 +195,31 @@ If everything went well you will get the following response depending on the fac
   "predictions": {
     "class_label": "NORMAL",
     "label": 0,
+    "meta": {
+      "description": "given a medical chest-x-ray image of a human being we are going to classify weather a person have pneumonia virus, pneumonia bacteria or none of those(normal).",
+      "language": "python",
+      "library": "pytorch",
+      "main": "computer vision (cv)",
+      "programmer": "@crispengari"
+    },
     "predictions": [
       {
         "class_label": "NORMAL",
         "label": 0,
-        "probability": 0.9900000095367432
+        "probability": 0.8500000238418579
       },
-      { "class_label": "PNEUMONIA BACTERIA", "label": 1, "probability": 0.0 },
+      {
+        "class_label": "PNEUMONIA BACTERIA",
+        "label": 1,
+        "probability": 0.07000000029802322
+      },
       {
         "class_label": "PNEUMONIA VIRAL",
         "label": 2,
-        "probability": 0.009999999776482582
+        "probability": 0.07999999821186066
       }
     ],
-    "probability": 0.9900000095367432
+    "probability": 0.8500000238418579
   },
   "success": true
 }
@@ -230,22 +248,29 @@ If everything went well you will be able to get expected response.
 ```json
 {
   "predictions": {
-    "class_label": "PNEUMONIA BACTERIA",
-    "label": 1,
+    "class_label": "PNEUMONIA VIRAL",
+    "label": 2,
+    "meta": {
+      "description": "given a medical chest-x-ray image of a human being we are going to classify weather a person have pneumonia virus, pneumonia bacteria or none of those(normal).",
+      "language": "python",
+      "library": "pytorch",
+      "main": "computer vision (cv)",
+      "programmer": "@crispengari"
+    },
     "predictions": [
-      { "class_label": "NORMAL", "label": 0, "probability": 0.0 },
+      {
+        "class_label": "NORMAL",
+        "label": 0,
+        "probability": 0.15000000596046448
+      },
       {
         "class_label": "PNEUMONIA BACTERIA",
         "label": 1,
-        "probability": 0.6299999952316284
+        "probability": 0.10000000149011612
       },
-      {
-        "class_label": "PNEUMONIA VIRAL",
-        "label": 2,
-        "probability": 0.36000001430511475
-      }
+      { "class_label": "PNEUMONIA VIRAL", "label": 2, "probability": 0.75 }
     ],
-    "probability": 0.6299999952316284
+    "probability": 0.75
   },
   "success": true
 }
