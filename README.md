@@ -1,4 +1,4 @@
-# Pneumonia Classification
+### Pneumonia Classification
 
 This is a simple `REST` api that is served to classify `pneumonia` given an X-ray image of a chest of a human being. The following are expected results when the model does it's classification.
 
