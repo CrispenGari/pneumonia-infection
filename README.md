@@ -1,6 +1,6 @@
 ### Pneumonia Classification
 
-This is a simple `REST` api that is served to classify `pneumonia` given an X-ray image of a chest of a human being. The following are expected results when the model does it's classification.
+This is a simple `REST` api that is served to classify `pneumonia` given an X-ray image of a chest of a human beings. The following are expected results when the model does it's classification.
 
 1. pneumonia bacteria
 2. pneumonia virus
@@ -26,19 +26,19 @@ git clone https://github.com/CrispenGari/pneumonia-infection.git
 cd pneumonia-infection
 ```
 
-3. create a virtual environment and activate it, you can create a virtual environment in may ways for example on windows you can create a virtual environment by running the following command:
+2. create a virtual environment and activate it, you can create a virtual environment in may ways for example on windows you can create a virtual environment by running the following command:
 
 ```shell
 virtualenv venv && .\venv\Scripts\activate
 ```
 
-2. run the following command to install packages
+3. run the following command to install packages
 
 ```shell
 pip install -r requirements.txt
 ```
 
-3. navigate to the folder where the `app.py` file is located and run
+4. navigate to the folder where the `app.py` file is located and run
 
 ```shell
 cd app
@@ -178,7 +178,7 @@ All models were trained for `20` epochs and the training the following table sho
         <td>1:04:01.61</td>
       </tr>
     </tbody>
-  </table>
+</table>
 
 These models have different model parameters, in the following table we are going to show the model parameters for each architecture.
 
@@ -204,6 +204,10 @@ These models have different model parameters, in the following table we are goin
     </tbody>
 </table>
 
+### Models Evaluation Metrics
+
+In the following table we are going to show the best model's `train`, `evaluation` and `test` `accuracy` for each model version.
+
 <table border="1">
     <thead>
       <tr>
@@ -225,12 +229,12 @@ These models have different model parameters, in the following table we are goin
         <td>MLP</td>
         <td>pneumonia classification using Multi Layer Perceprton (MLP)</td>
         <td>v0</td>
-        <td>73.73%</td>
-        <td>73.73%</td>
-        <td>72.47%</td>
-        <td>0.621</td>
-        <td>0.621</td>
-        <td>0.639</td>
+        <td>74.65%</td>
+        <td>74.65%</td>
+        <td>73.89%</td>
+        <td>0.600</td>
+        <td>0.600</td>
+        <td>0.602</td>
       </tr>
       <tr>
         <td>pneunomia_lenet.pt</td>
@@ -245,11 +249,9 @@ These models have different model parameters, in the following table we are goin
         <td>0.505</td>
       </tr>
     </tbody>
-  </table>
+</table>
 
-### Models Evaluation Metrics
-
-In this section we are going to show the model evaluation metrics using the whole `test` data which contains `1,135` examples of images mapped to their labels.
+Next, we are going to show the model evaluation metrics using the whole `test` data which contains `1,135` examples of images mapped to their labels.
 
 ### confusion matrix (`CM`)
 
@@ -268,6 +270,12 @@ The following visualization is of a confusion matrix based on the `MLP` model ar
 
 ### classification report (`CR`)
 
+In this section we are going to show the summary of the `classification report` based on the best saved model of the best model.
+
+1. `MLP` (v0)
+
+This is the `mlp` model's `cr`.
+
 <table border="1">
     <thead>
       <tr>
@@ -281,41 +289,118 @@ The following visualization is of a confusion matrix based on the `MLP` model ar
     <tbody>
       <tr>
         <td>micro avg</td>
-        <td>100%</td>
-        <td>81%</td>
-        <td>90%</td>
-        <td>4096</td>
+        <td>0.76</td>
+        <td>0.75</td>
+        <td>0.74</td>
+        <td>435669</td>
       </tr>
       <tr>
-        <td>macro avg</td>
-        <td>100%</td>
-        <td>81%</td>
-        <td>90%</td>
-        <td>4096</td>
+        <td>accuracy</td>
+        <td></td>
+        <td></td>
+        <td>0.75</td>
+        <td>435669</td>
       </tr>
       <tr>
         <td>weighted avg</td>
+        <td>0.75</td>
+        <td>0.76</td>
+        <td>0.74</td>
+        <td>435669</td>
+      </tr>
+    </tbody>
+  </table>
+
+2. `LeNet` (v1)
+
+This is the `LeNet` model's `cr`.
+
+<table border="1">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>precision</th>
+        <th>recall</th>
+        <th>f1-score</th>
+        <th>support</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>micro avg</td>
+        <td>0.78</td>
+        <td>0.77</td>
+        <td>0.76</td>
+        <td>435669</td>
+      </tr>
+      <tr>
+        <td>accuracy</td>
         <td>100%</td>
-        <td>81%</td>
-        <td>90%</td>
-        <td>4096</td>
+        <td></td>
+        <td>0.77</td>
+        <td>435669</td>
+      </tr>
+      <tr>
+        <td>weighted avg</td>
+        <td>0.77</td>
+        <td>0.78</td>
+        <td>0.76</td>
+        <td>435669</td>
       </tr>
     </tbody>
   </table>
 
 ### Pneumonia classification
 
-If you hit the server at `http://localhost:3001/api/pneumonia` you will be able to get the following expected response that is if the request method is `POST` and you provide the file expected by the server.
+During model evaluation both models were tested to see if they were classifying images correctly. A sample of `24` images was taken from the first batch of test data and here are the visual results of the classification for each model.
+
+1. `MLP` (v0)
+
+<p align="center" with="100%"><img src="images/mlp-example.png" width="100%" alt="cd"/>
+</p>
+
+2. `LeNet` (v1)
+
+<p align="center" with="100%"><img src="images/lenet_example.png" width="100%" alt="cd"/>
+</p>
+
+> The images that were marked their labels in color `RED` are the ones the model if misclassifying.
+
+### REST API
+
+This project exposes a `REST` api that is running on port `3001` which can be configured by changing the `AppConfig` in the `app/app.py` file that looks as follows:
+
+```py
+class AppConfig:
+    PORT = 3001
+    DEBUG = False
+```
+
+The server exposes two model versions the `v0` which is the `mlp` model and `v1` which is the `lenet` architecture. When making a request to the server you need to specify the model version that you want to use to make predictions. The `URL` looks as follows:
+
+```shell
+http://localhost:3001/api/<MODEL_VERSION>/pneumonia
+```
+
+The `MODEL_VERSION` an be either `v0` or `v1`. Here are the example of url's that can be used to make request to the server using these model versions.
+
+```shell
+http://localhost:3001/api/v0/pneumonia - mlp-model
+http://localhost:3001/api/v1/pneumonia - lenet-model
+```
+
+> Note that all the request should be sent to the server using the `POST` method.
 
 ### Expected Response
 
-The expected response at `http://localhost:3001/api/pneumonia` with a file `image` of the right format will yield the following `json` response to the client.
+The expected response at `http://localhost:3001/api/v0/pneumonia` with a file `image` of the right format will yield the following `json` response to the client.
 
 ```json
 {
+  "modelVersion": "v0",
   "predictions": {
-    "class_label": "PNEUMONIA VIRAL",
-    "label": 2,
+    "class_label": "NORMAL",
+    "label": 0,
     "meta": {
       "description": "given a medical chest-x-ray image of a human being we are going to classify weather a person have pneumonia virus, pneumonia bacteria or none of those(normal).",
       "language": "python",
@@ -327,16 +412,20 @@ The expected response at `http://localhost:3001/api/pneumonia` with a file `imag
       {
         "class_label": "NORMAL",
         "label": 0,
-        "probability": 0.15000000596046448
+        "probability": 0.9700000286102295
       },
       {
         "class_label": "PNEUMONIA BACTERIA",
         "label": 1,
-        "probability": 0.10000000149011612
+        "probability": 0.009999999776482582
       },
-      { "class_label": "PNEUMONIA VIRAL", "label": 2, "probability": 0.75 }
+      {
+        "class_label": "PNEUMONIA VIRAL",
+        "label": 2,
+        "probability": 0.029999999329447746
+      }
     ],
-    "probability": 0.75
+    "probability": 0.9700000286102295
   },
   "success": true
 }
@@ -346,10 +435,10 @@ The expected response at `http://localhost:3001/api/pneumonia` with a file `imag
 
 Make sure that you have the image named `normal.jpeg` in the current folder that you are running your `cmd` otherwise you have to provide an absolute or relative path to the image.
 
-> To make a `curl` `POST` request at `http://localhost:3001/api/pneumonia` with the file `normal.jpeg` we run the following command.
+> To make a `curl` `POST` request at `http://localhost:3001/api/v0/pneumonia` with the file `normal.jpeg` we run the following command.
 
 ```shell
-cURL -X POST -F image=@normal.jpeg http://127.0.0.1:3001/api/pneumonia
+cURL -X POST -F image=@normal.jpeg http://127.0.0.1:3001/api/v0/pneumonia
 ```
 
 ### Using Postman client
@@ -366,6 +455,7 @@ If everything went well you will get the following response depending on the fac
 
 ```json
 {
+  "modelVersion": "v0",
   "predictions": {
     "class_label": "NORMAL",
     "label": 0,
@@ -380,20 +470,20 @@ If everything went well you will get the following response depending on the fac
       {
         "class_label": "NORMAL",
         "label": 0,
-        "probability": 0.8500000238418579
+        "probability": 0.9700000286102295
       },
       {
         "class_label": "PNEUMONIA BACTERIA",
         "label": 1,
-        "probability": 0.07000000029802322
+        "probability": 0.009999999776482582
       },
       {
         "class_label": "PNEUMONIA VIRAL",
         "label": 2,
-        "probability": 0.07999999821186066
+        "probability": 0.029999999329447746
       }
     ],
-    "probability": 0.8500000238418579
+    "probability": 0.9700000286102295
   },
   "success": true
 }
@@ -409,7 +499,7 @@ If everything went well you will get the following response depending on the fac
 const input = document.getElementById("input").files[0];
 let formData = new FormData();
 formData.append("image", input);
-fetch("http://127.0.0.1:3001/api/pneumonia", {
+fetch("http://127.0.0.1:3001/api/v0/pneumonia", {
   method: "POST",
   body: formData,
 })
@@ -421,9 +511,10 @@ If everything went well you will be able to get expected response.
 
 ```json
 {
+  "modelVersion": "v0",
   "predictions": {
-    "class_label": "PNEUMONIA VIRAL",
-    "label": 2,
+    "class_label": "NORMAL",
+    "label": 0,
     "meta": {
       "description": "given a medical chest-x-ray image of a human being we are going to classify weather a person have pneumonia virus, pneumonia bacteria or none of those(normal).",
       "language": "python",
@@ -435,16 +526,20 @@ If everything went well you will be able to get expected response.
       {
         "class_label": "NORMAL",
         "label": 0,
-        "probability": 0.15000000596046448
+        "probability": 0.9700000286102295
       },
       {
         "class_label": "PNEUMONIA BACTERIA",
         "label": 1,
-        "probability": 0.10000000149011612
+        "probability": 0.009999999776482582
       },
-      { "class_label": "PNEUMONIA VIRAL", "label": 2, "probability": 0.75 }
+      {
+        "class_label": "PNEUMONIA VIRAL",
+        "label": 2,
+        "probability": 0.029999999329447746
+      }
     ],
-    "probability": 0.75
+    "probability": 0.9700000286102295
   },
   "success": true
 }
