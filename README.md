@@ -182,6 +182,8 @@ All models were trained for `20` epochs and the training the following table sho
     </tbody>
 </table>
 
+> We can see that the `mlp` model architecture took a lot of time to train for `20` epochs as compared to the `lenet` architecture. This is because of the total number of trainable parameters it has which are more that the ones that `lenet` has.
+
 These models have different model parameters, in the following table we are going to show the model parameters for each architecture.
 
 <table border="1">
