@@ -59,22 +59,24 @@ Our simple **M**ulti **L**ayer **P**erceptron **(MLP)** architecture to do the c
 
 ```py
 class MLP(nn.Module):
-    def __init__(self, input_dim, output_dim, dropout=.5):
-        super(MLP, self).__init__()
-        self.input_fc = nn.Linear(input_dim, 250)
-        self.hidden_fc = nn.Linear(250, 100)
-        self.output_fc = nn.Linear(100, output_dim)
-        self.dropout = nn.Dropout(dropout)
-
-    def forward(self, x):
-        batch_size = x.shape[0]
-        x = x.view(batch_size, -1)
-        x = F.relu(self.input_fc(x))
-        x = self.dropout(x)
-        x = F.relu(self.hidden_fc(x))
-        x = self.dropout(x)
-        outputs = self.output_fc(x)
-        return outputs, x
+  def __init__(self, input_dim, output_dim, dropout=.5):
+      super(MLP, self).__init__()
+      self.classifier = nn.Sequential(
+          nn.Linear(input_dim, 250),
+          nn.ReLU(),
+          nn.Dropout(dropout),
+          nn.Linear(250, 100),
+          nn.ReLU(),
+          nn.Dropout(dropout),
+          nn.Linear(100, output_dim)
+      )
+  def forward(self, x):
+      # x = [batch size, height, width]
+      batch_size = x.shape[0]
+      x = x.view(batch_size, -1)
+      # x = [batch size, height * width]
+      x = self.classifier(x) # x = [batch_size, output_dim]
+      return x
 ```
 
 > All images are transformed to `grayscale`.
@@ -168,8 +170,8 @@ All models were trained for `20` epochs and the training the following table sho
       <tr>
         <td>MLP</td>
         <td>20</td>
-        <td>20</td>
-        <td>1:04:01.61</td>
+        <td>19</td>
+        <td>1:43:39.66</td>
       </tr>
       <tr>
         <td>LeNet</td>

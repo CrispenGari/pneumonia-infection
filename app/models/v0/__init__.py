@@ -19,20 +19,23 @@ model_path = os.path.join(os.getcwd(), "models/static/pneumonia_mlp.pt")
 class MLP(nn.Module):
     def __init__(self, input_dim, output_dim, dropout=.5):
         super(MLP, self).__init__()
-        self.input_fc = nn.Linear(input_dim, 250)
-        self.hidden_fc = nn.Linear(250, 100)
-        self.output_fc = nn.Linear(100, output_dim)
-        self.dropout = nn.Dropout(dropout)
+        self.classifier = nn.Sequential(
+            nn.Linear(input_dim, 250),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(250, 100),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(100, output_dim)
+        )
 
     def forward(self, x):
+        # x = [batch size, height, width]
         batch_size = x.shape[0]
         x = x.view(batch_size, -1)
-        x = F.relu(self.input_fc(x))
-        x = self.dropout(x)
-        x = F.relu(self.hidden_fc(x))
-        x = self.dropout(x)
-        outputs = self.output_fc(x)
-        return outputs, x
+        # x = [batch size, height * width]
+        x = self.classifier(x) # x = [batch_size, output_dim]
+        return x
 
 print(" *   LOADING v0 MODEL")
 pneumonia_mpl = MLP(INPUT_DIM, OUTPUT_DIM, dropout).to(device)
@@ -41,7 +44,7 @@ print("\n *  LOADING v0 MODEL COMPLETE")
 
 def make_prediction(model, image):
     image = image.to(device)
-    preds, _ = model(image)
+    preds = model(image)
     preds = F.softmax(preds, dim=1).detach().cpu().numpy().squeeze()
 
     predicted_label = np.argmax(preds)
