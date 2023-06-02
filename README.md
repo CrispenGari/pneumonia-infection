@@ -6,8 +6,8 @@ This is a simple `REST` api that is served to classify `pneumonia` given an X-ra
 2. pneumonia virus
 3. normal
 
-<p align="center" with="100%">
-<img src="/images/pneumonia.jpg" width="100%" alt=""/>
+<p align="center" width="100%">
+<img src="/images/pneumonia.jpg" width="300" alt="logo"/>
 </p>
 
 ### Starting the server
@@ -170,19 +170,31 @@ All models were trained for `20` epochs and the training the following table sho
       <tr>
         <td>MLP</td>
         <td>20</td>
-        <td>19</td>
-        <td>1:43:39.66</td>
+        <td>14</td>
+        <td>1:39:17.87</td>
       </tr>
       <tr>
         <td>LeNet</td>
         <td>20</td>
         <td>20</td>
-        <td>1:04:01.61</td>
+        <td>0:55:03.84</td>
       </tr>
     </tbody>
 </table>
 
-> We can see that the `mlp` model architecture took a lot of time to train for `20` epochs as compared to the `lenet` architecture. This is because of the total number of trainable parameters it has which are more that the ones that `lenet` has.
+> We can see that the `mlp` model architecture took a lot of time to train for `20` epochs as compared to the `lenet` architecture. This is because of the total number of trainable parameters it has which are more that the ones that `lenet` has. We can further visualize the training time for each model using line graphs:
+
+1. `MLP` (v0)
+
+<p align="center" width="400">
+<img src="images/mlp_training_time.png"  alt="tt"/>
+</p>
+
+2. `LeNet` (v1)
+
+<p align="center" >
+<img src="images/lenet_training_time.png"  alt="tt" width="400"/>
+</p>
 
 These models have different model parameters, in the following table we are going to show the model parameters for each architecture.
 
@@ -233,12 +245,12 @@ In the following table we are going to show the best model's `train`, `evaluatio
         <td>MLP</td>
         <td>pneumonia classification using Multi Layer Perceprton (MLP)</td>
         <td>v0</td>
-        <td>74.65%</td>
-        <td>74.65%</td>
+        <td>75.46%</td>
+        <td>75.46%</td>
         <td>73.89%</td>
-        <td>0.600</td>
-        <td>0.600</td>
         <td>0.602</td>
+        <td>0.602</td>
+        <td>0.606</td>
       </tr>
       <tr>
         <td>pneunomia_lenet.pt</td>
@@ -255,6 +267,20 @@ In the following table we are going to show the best model's `train`, `evaluatio
     </tbody>
 </table>
 
+We can further display visualize the model training history using line graphs for each model architecture in terms of `train loss`, `validation loss`, `train accuracy` and `validation accuracy` and see how each architecture manage to reduce loss and increase accuracy over each training epoch.
+
+1. `MLP` (v0)
+
+<p align="center" width="400">
+<img src="images/mlp_training_history.png"  alt="th"/>
+</p>
+
+2. `LeNet` (v1)
+
+<p align="center" width="400">
+<img src="images/lenet_training_history.png"  alt="th"/>
+</p>
+
 Next, we are going to show the model evaluation metrics using the whole `test` data which contains `1,135` examples of images mapped to their labels.
 
 ### confusion matrix (`CM`)
@@ -263,13 +289,13 @@ Next, we are going to show the model evaluation metrics using the whole `test` d
 
 The following visualization is of a confusion matrix based on the `MLP` model architecture which was tested using `1,135` images on the `test` dataset.
 
-<p align="center" with="100%"><img src="images/mlp_cm.png" width="100%" alt="cd"/>
+<p align="center"><img src="images/mlp_cm.png" width="400" alt="cd"/>
 </p>
 
 2. `LeNet` (v1)
    The following visualization is of a confusion matrix based on the `LeNet` model architecture which was tested using `1,135` images on the `test` dataset.
 
-<p align="center" with="100%"><img src="images/lenet_cm.png" width="100%" alt="cd"/>
+<p align="center"><img src="images/lenet_cm.png" width="400" alt="cd"/>
 </p>
 
 ### classification report (`CR`)
@@ -291,26 +317,47 @@ This is the `mlp` model's `cr`.
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>micro avg</td>
+     <tr>
+        <td>0 <b><small>(NORMAL)<small></b></td>
+        <td>0.81</td>
+        <td>0.84</td>
+        <td>0.82</td>
+        <td>337</td>
+      </tr>
+     <tr>
+        <td>1 <b><small>(BACTERIA)<small></b></td>
+        <td>0.73</td>
+        <td>0.90</td>
+        <td>0.81</td>
+        <td>442</td>
+      </tr>
+     <tr>
+        <td>2 <b><small>(VIRUS)<small></b></td>
         <td>0.76</td>
-        <td>0.75</td>
-        <td>0.74</td>
-        <td>435669</td>
+        <td>0.50</td>
+        <td>0.60</td>
+        <td>356</td>
       </tr>
       <tr>
         <td>accuracy</td>
         <td></td>
         <td></td>
+        <td>0.76</td>
+        <td>1135</td>
+      </tr>
+      <tr>
+        <td>micro avg</td>
+        <td>0.76</td>
         <td>0.75</td>
-        <td>435669</td>
+        <td>0.74</td>
+        <td>1135</td>
       </tr>
       <tr>
         <td>weighted avg</td>
-        <td>0.75</td>
         <td>0.76</td>
-        <td>0.74</td>
-        <td>435669</td>
+        <td>0.76</td>
+        <td>0.75</td>
+        <td>1135</td>
       </tr>
     </tbody>
   </table>
@@ -330,26 +377,47 @@ This is the `LeNet` model's `cr`.
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>micro avg</td>
-        <td>0.78</td>
-        <td>0.77</td>
-        <td>0.76</td>
-        <td>435669</td>
+     <tr>
+        <td>0 <b><small>(NORMAL)<small></b></td>
+        <td>0.88</td>
+        <td>0.82</td>
+        <td>0.85</td>
+        <td>337</td>
+      </tr>
+     <tr>
+        <td>1 <b><small>(BACTERIA)<small></b></td>
+        <td>0.70</td>
+        <td>0.95</td>
+        <td>0.81</td>
+        <td>442</td>
+      </tr>
+     <tr>
+        <td>2 <b><small>(VIRUS)<small></b></td>
+        <td>0.79</td>
+        <td>0.49</td>
+        <td>0.61</td>
+        <td>356</td>
       </tr>
       <tr>
         <td>accuracy</td>
-        <td>100%</td>
+        <td></td>
         <td></td>
         <td>0.77</td>
-        <td>435669</td>
+        <td>1135</td>
+      </tr>
+      <tr>
+        <td>micro avg</td>
+        <td>0.79</td>
+        <td>0.75</td>
+        <td>0.75</td>
+        <td>1135</td>
       </tr>
       <tr>
         <td>weighted avg</td>
-        <td>0.77</td>
         <td>0.78</td>
+        <td>0.77</td>
         <td>0.76</td>
-        <td>435669</td>
+        <td>1135</td>
       </tr>
     </tbody>
   </table>
