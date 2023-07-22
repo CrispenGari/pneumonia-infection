@@ -10,7 +10,11 @@ This is a simple `REST` api that is served to classify `pneumonia` given an X-ra
 <img src="/images/pneumonia.jpg" width="300" alt="logo"/>
 </p>
 
-### Starting the server
+### Deployed
+
+The deployed version of the API can be found at [PC-API](https://pc-djhy.onrender.com/) where you can make classification requests to the server and get response.
+
+### Starting the server locally
 
 To run this server and make prediction on your own images follow the following steps
 
@@ -449,12 +453,24 @@ class AppConfig:
 The server exposes two model versions the `v0` which is the `mlp` model and `v1` which is the `lenet` architecture. When making a request to the server you need to specify the model version that you want to use to make predictions. The `URL` looks as follows:
 
 ```shell
+
+# remote
+https://pc-djhy.onrender.com/api/<MODEL_VERSION>/pneumonia
+
+# locally
 http://localhost:3001/api/<MODEL_VERSION>/pneumonia
 ```
 
 The `MODEL_VERSION` an be either `v0` or `v1`. Here are the example of url's that can be used to make request to the server using these model versions.
 
 ```shell
+
+# remote
+https://pc-djhy.onrender.com/api/v0/pneumonia - mlp-model
+https://pc-djhy.onrender.com/api/v1/pneumonia - lenet-model
+
+
+# locally
 http://localhost:3001/api/v0/pneumonia - mlp-model
 http://localhost:3001/api/v1/pneumonia - lenet-model
 ```
@@ -463,7 +479,7 @@ http://localhost:3001/api/v1/pneumonia - lenet-model
 
 ### Expected Response
 
-The expected response at `http://localhost:3001/api/v0/pneumonia` with a file `image` of the right format will yield the following `json` response to the client.
+The expected response at `http://localhost:3001/api/v0/pneumonia` or at `https://pc-djhy.onrender.com/api/v0/pneumonia` with a file `image` of the right format will yield the following `json` response to the client.
 
 ```json
 {
@@ -505,9 +521,12 @@ The expected response at `http://localhost:3001/api/v0/pneumonia` with a file `i
 
 Make sure that you have the image named `normal.jpeg` in the current folder that you are running your `cmd` otherwise you have to provide an absolute or relative path to the image.
 
-> To make a `curl` `POST` request at `http://localhost:3001/api/v0/pneumonia` with the file `normal.jpeg` we run the following command.
+> To make a `curl` `POST` request at `http://localhost:3001/api/v0/pneumonia` or at `https://pc-djhy.onrender.com/api/v0/pneumonia` with the file `normal.jpeg` we run the following command.
 
 ```shell
+# remote
+cURL -X POST -F image=@normal.jpeg https://pc-djhy.onrender.com/api/v0/pneumonia
+# locally
 cURL -X POST -F image=@normal.jpeg http://127.0.0.1:3001/api/v0/pneumonia
 ```
 
@@ -566,10 +585,15 @@ If everything went well you will get the following response depending on the fac
 3. make a POST requests
 
 ```js
+const online = false;
+const url = online
+  ? `https://pc-djhy.onrender.com/api/v0/pneumonia`
+  : "http://127.0.0.1:3001/api/v0/pneumonia";
+
 const input = document.getElementById("input").files[0];
 let formData = new FormData();
 formData.append("image", input);
-fetch("http://127.0.0.1:3001/api/v0/pneumonia", {
+fetch(url, {
   method: "POST",
   body: formData,
 })
