@@ -23,7 +23,7 @@ git clone https://github.com/CrispenGari/pneumonia-infection.git
 1. Navigate to the folder `pneumonia-infection` by running the following command:
 
 ```shell
-cd pneumonia-infection
+cd pneumonia-infection/server
 ```
 
 2. create a virtual environment and activate it, you can create a virtual environment in may ways for example on windows you can create a virtual environment by running the following command:
@@ -41,8 +41,6 @@ pip install -r requirements.txt
 4. navigate to the folder where the `app.py` file is located and run
 
 ```shell
-cd app
-# then
 python app.py
 ```
 
