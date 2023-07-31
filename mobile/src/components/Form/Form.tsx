@@ -9,6 +9,7 @@ import TypeWriter from "react-native-typewriter";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 import Dropdown from "react-native-input-select";
 import { styles } from "../../styles";
+import { onImpact } from "../../utils";
 
 interface Props {
   diagnosing: boolean;
@@ -33,10 +34,13 @@ const Form: React.FunctionComponent<Props> = ({
   image,
 }) => {
   const {
-    settings: { theme },
+    settings: { theme, ...settings },
   } = useSettingsStore();
   const { camera, library } = useMediaPermissions();
   const openCamera = async () => {
+    if (settings.haptics) {
+      onImpact();
+    }
     if (!camera) {
       Alert.alert(
         APP_NAME,
@@ -76,6 +80,9 @@ const Form: React.FunctionComponent<Props> = ({
     }
   };
   const selectImage = async () => {
+    if (settings.haptics) {
+      onImpact();
+    }
     if (!library) {
       Alert.alert(
         APP_NAME,

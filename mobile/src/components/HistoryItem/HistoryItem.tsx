@@ -54,7 +54,12 @@ const HistoryItem: React.FunctionComponent<Props> = ({
               borderTopLeftRadius: 0,
               borderBottomLeftRadius: 0,
             }}
-            onPress={() => deleteHistoryItem(id)}
+            onPress={() => {
+              if (settings.haptics) {
+                onImpact();
+              }
+              deleteHistoryItem(id);
+            }}
           >
             <MaterialIcons name="delete" size={24} color="white" />
           </TouchableOpacity>

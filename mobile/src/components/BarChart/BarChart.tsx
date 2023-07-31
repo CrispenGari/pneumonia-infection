@@ -5,6 +5,7 @@ import { COLORS } from "../../constants";
 import { PredictionType } from "../../types";
 import { useSettingsStore } from "../../store";
 import { styles } from "../../styles";
+import { useMediaQuery } from "../../hooks";
 interface Props {
   predictions: PredictionType[];
 }
@@ -14,6 +15,10 @@ const Bar: React.FunctionComponent<Props> = ({ predictions }) => {
   const {
     settings: { theme },
   } = useSettingsStore();
+
+  const {
+    dimension: { width },
+  } = useMediaQuery();
 
   React.useEffect(() => {
     let mounted = true;
@@ -70,8 +75,8 @@ const Bar: React.FunctionComponent<Props> = ({ predictions }) => {
           ],
         }}
         fromZero
-        width={400}
-        height={400}
+        width={width < 600 ? 350 : 400}
+        height={width < 600 ? 350 : 400}
         yAxisLabel="  "
         yAxisSuffix=""
         showBarTops={false}

@@ -32,6 +32,7 @@ const ResultImage: React.FunctionComponent<Props> = ({ prediction, uri }) => {
         justifyContent: "center",
         alignItems: "center",
         padding: 10,
+        marginBottom: 20,
       }}
     >
       <TypeWriter

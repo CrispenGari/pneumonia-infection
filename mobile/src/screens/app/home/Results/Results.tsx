@@ -1,6 +1,6 @@
 import { TouchableOpacity, ScrollView } from "react-native";
 import React from "react";
-import { COLORS } from "../../../../constants";
+import { COLORS, models } from "../../../../constants";
 import { useSettingsStore } from "../../../../store";
 import { HomeTabStacksNavProps } from "../../../../params";
 import { PredictionResponse } from "../../../../types";
@@ -10,6 +10,7 @@ import ClassifierDate from "../../../../components/ClassifierDate/ClassifierDate
 import { onImpact } from "../../../../utils";
 import ResultImage from "../../../../components/ResultImage/ResultImage";
 import BarChart from "../../../../components/BarChart/BarChart";
+import TableComponent from "../../../../components/TableComponent/TableComponent";
 
 const Results: React.FunctionComponent<HomeTabStacksNavProps<"Results">> = ({
   navigation,
@@ -21,7 +22,10 @@ const Results: React.FunctionComponent<HomeTabStacksNavProps<"Results">> = ({
   } = useSettingsStore();
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      headerTitle: results.predictions?.top_prediction.class_label ?? "Results",
+      headerTitle:
+        results.predictions?.top_prediction.class_label
+          .replace("Pneumonia".toUpperCase(), "")
+          .trim() ?? "Results",
       headerRight: () => (
         <TouchableOpacity
           style={{ marginHorizontal: 20 }}
@@ -68,7 +72,33 @@ const Results: React.FunctionComponent<HomeTabStacksNavProps<"Results">> = ({
         uri={route.params.image}
         prediction={results.predictions!.top_prediction}
       />
+
+      <TableComponent
+        title="Possible Pneumonia Outcomes"
+        tableHead={["Class Name", "Probability", "Class Label"]}
+        tableData={[
+          ...results.predictions!.all_predictions.map(
+            ({ class_label, label, probability }) => [
+              class_label.toLowerCase().replace("pneumonia", ""),
+              probability.toFixed(2).toString(),
+              label.toString(),
+            ]
+          ),
+        ]}
+      />
+
       <BarChart predictions={results.predictions!.all_predictions} />
+      <TableComponent
+        title="Model Version"
+        tableHead={["Model Name", "Model Version"]}
+        tableData={[
+          [
+            models.find((model) => model.version === results.modelVersion)!
+              .name,
+            results.modelVersion,
+          ],
+        ]}
+      />
     </ScrollView>
   );
 };

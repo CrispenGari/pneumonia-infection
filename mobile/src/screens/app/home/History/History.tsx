@@ -5,7 +5,7 @@ import { useSettingsStore } from "../../../../store";
 import { HomeTabStacksNavProps } from "../../../../params";
 import AppStackBackButton from "../../../../components/AppStackBackButton/AppStackBackButton";
 import { HistoryType } from "../../../../types";
-import { retrieve, store } from "../../../../utils";
+import { onImpact, retrieve, store } from "../../../../utils";
 import Divider from "../../../../components/Divider/Divider";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -19,7 +19,7 @@ const History: React.FunctionComponent<HomeTabStacksNavProps<"History">> = ({
   route,
 }) => {
   const {
-    settings: { theme },
+    settings: { theme, ...settings },
   } = useSettingsStore();
   const [history, setHistory] = React.useState<HistoryType[]>([]);
   React.useEffect(() => {
@@ -33,7 +33,13 @@ const History: React.FunctionComponent<HomeTabStacksNavProps<"History">> = ({
       headerLeft: () => (
         <AppStackBackButton
           label={route.params.from}
-          onPress={() => navigation.goBack()}
+          onPress={() => {
+            if (settings.haptics) {
+              onImpact();
+            }
+
+            navigation.goBack();
+          }}
         />
       ),
     });

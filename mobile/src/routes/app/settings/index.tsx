@@ -6,10 +6,17 @@ import {
   SettingsLanding,
   TermsOfUse,
 } from "../../../screens/app/settings";
+import { useSettingsStore } from "../../../store";
+import { useMediaQuery } from "../../../hooks";
 
 const Stack = createStackNavigator<SettingsTabStacksParamList>();
-
 export const SettingsStack = () => {
+  const {
+    settings: { theme },
+  } = useSettingsStore();
+  const {
+    dimension: { width },
+  } = useMediaQuery();
   return (
     <Stack.Navigator
       initialRouteName="SettingsLanding"
@@ -18,12 +25,14 @@ export const SettingsStack = () => {
           shadowOpacity: 0,
           elevation: 0,
           borderBottomColor: "transparent",
-          height: 100,
-          backgroundColor: COLORS.common.rating,
+          height: width < 600 ? 100 : 80,
+          backgroundColor:
+            theme === "dark" ? COLORS.dark.primary : COLORS.light.primary,
         },
         headerTitleStyle: {
           fontFamily: FONTS.regularBold,
           fontSize: 24,
+          color: theme === "dark" ? COLORS.common.white : COLORS.common.black,
         },
         headerShown: true,
       }}
