@@ -3,13 +3,16 @@ import * as Linking from "expo-linking";
 import React from "react";
 import { AuthStack } from "./auth";
 import NetInfo from "@react-native-community/netinfo";
-import { useNetworkStore } from "../store";
+import { useNetworkStore, useSettingsStore } from "../store";
 import { AppTabs } from "./app";
 import { APP_NAME } from "../constants";
 
 const Routes = () => {
   const prefix = Linking.createURL("/");
   const { setNetwork } = useNetworkStore();
+  const {
+    settings: { new: isNew },
+  } = useSettingsStore();
 
   React.useEffect(() => {
     const unsubscribe = NetInfo.addEventListener(
@@ -37,7 +40,7 @@ const Routes = () => {
         },
       }}
     >
-      {false ? <AppTabs /> : <AuthStack />}
+      {!isNew ? <AppTabs /> : <AuthStack />}
     </NavigationContainer>
   );
 };

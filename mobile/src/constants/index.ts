@@ -1,8 +1,5 @@
 export const KEYS = {
-  NEW_TO_APP: "NEW_TO_APP",
   APP_SETTINGS: "APP_SETTINGS",
-  BOOK_MARKS: "BOOK_MARKS",
-  SEARCH_HISTORY: "SEARCH_HISTORY",
 };
 
 export const serverBaseURL = "https://pc-djhy.onrender.com";
@@ -24,6 +21,7 @@ export const COLORS = {
     rating: "#FEC700",
     url: "#00A8F5",
     white: "white",
+    black: "black",
   },
 };
 export const Fonts = {

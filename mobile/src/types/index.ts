@@ -7,11 +7,10 @@ export type NetworkType = {
   isInternetReachable: boolean | null;
 };
 
+export type ThemeType = ColorSchemeName;
 export type SettingsType = {
   haptics: boolean;
   sound: boolean;
   new: boolean;
   theme: ThemeType;
 };
-
-export type ThemeType = ColorSchemeName;
