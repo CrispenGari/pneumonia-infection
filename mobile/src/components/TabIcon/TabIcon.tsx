@@ -1,7 +1,8 @@
 import React from "react";
-import { View, Image, Text } from "react-native";
+import { View, Text } from "react-native";
 import { COLORS } from "../../constants";
 import { useMediaQuery } from "../../hooks";
+import { useSettingsStore } from "../../store";
 interface IconI {
   IconComponent: any;
   name: string;
@@ -15,6 +16,10 @@ const TabIcon: React.FC<Props> = ({ focused, Icon, title }) => {
   const {
     dimension: { width },
   } = useMediaQuery();
+
+  const {
+    settings: { theme },
+  } = useSettingsStore();
   return (
     <View
       style={[
@@ -27,14 +32,37 @@ const TabIcon: React.FC<Props> = ({ focused, Icon, title }) => {
         },
       ]}
     >
-      <Icon.IconComponent
-        name={Icon.name}
-        size={20}
-        color={focused ? COLORS.common.red : COLORS.common.red}
-      />
-      <Text style={{ color: focused ? COLORS.common.red : COLORS.common.red }}>
-        {title}
-      </Text>
+      {theme === "dark" ? (
+        <>
+          <Icon.IconComponent
+            name={Icon.name}
+            size={20}
+            color={!focused ? COLORS.common.white : COLORS.dark.secondary}
+          />
+          <Text
+            style={{
+              color: !focused ? COLORS.common.white : COLORS.dark.secondary,
+            }}
+          >
+            {title}
+          </Text>
+        </>
+      ) : (
+        <>
+          <Icon.IconComponent
+            name={Icon.name}
+            size={20}
+            color={focused ? COLORS.common.black : COLORS.light.tertiary}
+          />
+          <Text
+            style={{
+              color: focused ? COLORS.common.black : COLORS.light.tertiary,
+            }}
+          >
+            {title}
+          </Text>
+        </>
+      )}
     </View>
   );
 };

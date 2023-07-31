@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, SafeAreaView } from "react-native";
 import React from "react";
 import { APP_NAME, COLORS, KEYS, logo } from "../../../constants";
 import { AuthNavProps } from "../../../params";
@@ -6,10 +6,8 @@ import { styles } from "../../../styles";
 import * as Animatable from "react-native-animatable";
 import TypeWriter from "react-native-typewriter";
 import { LinearGradient } from "expo-linear-gradient";
-
 import { useSettingsStore } from "../../../store";
 import { onImpact, store } from "../../../utils";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { SettingsType } from "../../../types";
 
 const messages = [

@@ -4,12 +4,16 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { HomeStack } from "./home";
 import { SettingsStack } from "./settings";
 import TabIcon from "../../components/TabIcon/TabIcon";
-import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 import React from "react";
+import { useSettingsStore } from "../../store";
 const Tab = createBottomTabNavigator<AppParamList>();
 
 export const AppTabs = () => {
+  const {
+    settings: { theme },
+  } = useSettingsStore();
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -21,9 +25,10 @@ export const AppTabs = () => {
           shadowOpacity: 0,
           borderTopWidth: 0,
           borderColor: "transparent",
-          backgroundColor: COLORS.dark.primary,
+          backgroundColor:
+            theme === "dark" ? COLORS.dark.primary : COLORS.light.primary,
           paddingVertical: 10,
-          height: 80,
+          height: 60,
           width: "auto",
         },
         tabBarShowLabel: false,
@@ -55,8 +60,8 @@ export const AppTabs = () => {
               {...props}
               title="home"
               Icon={{
-                name: "home-account",
-                IconComponent: MaterialCommunityIcons,
+                name: "home",
+                IconComponent: AntDesign,
               }}
             />
           ),
@@ -72,8 +77,8 @@ export const AppTabs = () => {
               {...props}
               title="settings"
               Icon={{
-                name: "settings",
-                IconComponent: Ionicons,
+                name: "setting",
+                IconComponent: AntDesign,
               }}
             />
           ),

@@ -2,6 +2,10 @@ export const KEYS = {
   APP_SETTINGS: "APP_SETTINGS",
 };
 
+export const models = [
+  { name: "Multi Layer Perceptron (MLP)", version: "v0", id: 0 },
+  { name: "LeNET", version: "v1", id: 1 },
+];
 export const serverBaseURL = "https://pc-djhy.onrender.com";
 export const COLORS = {
   light: {
