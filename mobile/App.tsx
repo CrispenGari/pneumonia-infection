@@ -1,32 +1,47 @@
 import "react-native-gesture-handler";
 import React from "react";
-import { Text, View, StatusBar, LogBox } from "react-native";
+import { View, StatusBar, LogBox } from "react-native";
 import * as Font from "expo-font";
-import { Fonts } from "./src/constants";
+import { Fonts, KEYS } from "./src/constants";
 import Routes from "./src/routes";
 import ReactQueryProvider from "./src/providers/ReactQueryProvider";
+import Loading from "./src/components/Loading/Loading";
+import { Appearance, useColorScheme } from "react-native";
+import { useSettingsStore } from "./src/store";
+import { SettingsType } from "./src/types";
+import { store } from "./src/utils";
 
 LogBox.ignoreLogs;
 LogBox.ignoreAllLogs();
 const App = () => {
-  const [ready, setReady] = React.useState<boolean>(false);
-  React.useLayoutEffect(() => {
-    (async () => {
-      await Font.loadAsync(Fonts);
-    })()
-      .catch((e) => console.warn(e))
-      .finally(() => setReady(true));
-  }, []);
+  const [ready] = Font.useFonts(Fonts);
+  const theme = useColorScheme();
+  const { settings, setSettings } = useSettingsStore();
+  Appearance.addChangeListener(async ({ colorScheme }) => {
+    const s: SettingsType = {
+      ...settings,
+      theme: colorScheme,
+    };
+    await store(KEYS.APP_SETTINGS, JSON.stringify(s));
+    setSettings(s);
+  });
 
-  if (!ready)
-    return (
-      <View style={{ flex: 1 }}>
-        <Text>Loading...</Text>
-      </View>
-    );
+  React.useEffect(() => {
+    (async () => {
+      const s: SettingsType = {
+        ...settings,
+        theme,
+      };
+      await store(KEYS.APP_SETTINGS, JSON.stringify(s));
+      setSettings(s);
+    })();
+  }, [theme]);
+  if (!ready) return <Loading withLogo={true} title="Loading..." />;
   return (
     <View style={{ flex: 1 }}>
-      <StatusBar barStyle={"dark-content"} />
+      <StatusBar
+        barStyle={settings.theme === "light" ? "dark-content" : "light-content"}
+      />
       <ReactQueryProvider>
         <Routes />
       </ReactQueryProvider>

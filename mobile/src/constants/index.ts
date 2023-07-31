@@ -7,13 +7,13 @@ export const KEYS = {
 
 export const serverBaseURL = "https://pc-djhy.onrender.com";
 export const COLORS = {
-  dark: {
+  light: {
     main: "#FEF7DC",
     primary: "#E6DDC6",
     secondary: "#C2B8A3",
     tertiary: "#A19882",
   },
-  light: {
+  dark: {
     main: "#2C3333",
     primary: "#2E4F4F",
     secondary: "#0E8388",
