@@ -483,35 +483,25 @@ The expected response at `http://localhost:3001/api/v0/pneumonia` or at `https:/
 
 ```json
 {
+  "meta": {
+    "description": "given a medical chest-x-ray image of a human being we are going to classify weather a person have pneumonia virus, pneumonia bacteria or none of those(normal).",
+    "language": "python",
+    "library": "pytorch",
+    "main": "computer vision (cv)",
+    "programmer": "@crispengari"
+  },
   "modelVersion": "v0",
   "predictions": {
-    "class_label": "NORMAL",
-    "label": 0,
-    "meta": {
-      "description": "given a medical chest-x-ray image of a human being we are going to classify weather a person have pneumonia virus, pneumonia bacteria or none of those(normal).",
-      "language": "python",
-      "library": "pytorch",
-      "main": "computer vision (cv)",
-      "programmer": "@crispengari"
-    },
-    "predictions": [
-      {
-        "class_label": "NORMAL",
-        "label": 0,
-        "probability": 0.9700000286102295
-      },
-      {
-        "class_label": "PNEUMONIA BACTERIA",
-        "label": 1,
-        "probability": 0.009999999776482582
-      },
-      {
-        "class_label": "PNEUMONIA VIRAL",
-        "label": 2,
-        "probability": 0.029999999329447746
-      }
+    "all_predictions": [
+      { "class_label": "NORMAL", "label": 0, "probability": 1.0 },
+      { "class_label": "PNEUMONIA BACTERIA", "label": 1, "probability": 0.0 },
+      { "class_label": "PNEUMONIA VIRAL", "label": 2, "probability": 0.0 }
     ],
-    "probability": 0.9700000286102295
+    "top_prediction": {
+      "class_label": "NORMAL",
+      "label": 0,
+      "probability": 1.0
+    }
   },
   "success": true
 }
@@ -544,35 +534,25 @@ If everything went well you will get the following response depending on the fac
 
 ```json
 {
+  "meta": {
+    "description": "given a medical chest-x-ray image of a human being we are going to classify weather a person have pneumonia virus, pneumonia bacteria or none of those(normal).",
+    "language": "python",
+    "library": "pytorch",
+    "main": "computer vision (cv)",
+    "programmer": "@crispengari"
+  },
   "modelVersion": "v0",
   "predictions": {
-    "class_label": "NORMAL",
-    "label": 0,
-    "meta": {
-      "description": "given a medical chest-x-ray image of a human being we are going to classify weather a person have pneumonia virus, pneumonia bacteria or none of those(normal).",
-      "language": "python",
-      "library": "pytorch",
-      "main": "computer vision (cv)",
-      "programmer": "@crispengari"
-    },
-    "predictions": [
-      {
-        "class_label": "NORMAL",
-        "label": 0,
-        "probability": 0.9700000286102295
-      },
-      {
-        "class_label": "PNEUMONIA BACTERIA",
-        "label": 1,
-        "probability": 0.009999999776482582
-      },
-      {
-        "class_label": "PNEUMONIA VIRAL",
-        "label": 2,
-        "probability": 0.029999999329447746
-      }
+    "all_predictions": [
+      { "class_label": "NORMAL", "label": 0, "probability": 1.0 },
+      { "class_label": "PNEUMONIA BACTERIA", "label": 1, "probability": 0.0 },
+      { "class_label": "PNEUMONIA VIRAL", "label": 2, "probability": 0.0 }
     ],
-    "probability": 0.9700000286102295
+    "top_prediction": {
+      "class_label": "NORMAL",
+      "label": 0,
+      "probability": 1.0
+    }
   },
   "success": true
 }
@@ -605,35 +585,25 @@ If everything went well you will be able to get expected response.
 
 ```json
 {
+  "meta": {
+    "description": "given a medical chest-x-ray image of a human being we are going to classify weather a person have pneumonia virus, pneumonia bacteria or none of those(normal).",
+    "language": "python",
+    "library": "pytorch",
+    "main": "computer vision (cv)",
+    "programmer": "@crispengari"
+  },
   "modelVersion": "v0",
   "predictions": {
-    "class_label": "NORMAL",
-    "label": 0,
-    "meta": {
-      "description": "given a medical chest-x-ray image of a human being we are going to classify weather a person have pneumonia virus, pneumonia bacteria or none of those(normal).",
-      "language": "python",
-      "library": "pytorch",
-      "main": "computer vision (cv)",
-      "programmer": "@crispengari"
-    },
-    "predictions": [
-      {
-        "class_label": "NORMAL",
-        "label": 0,
-        "probability": 0.9700000286102295
-      },
-      {
-        "class_label": "PNEUMONIA BACTERIA",
-        "label": 1,
-        "probability": 0.009999999776482582
-      },
-      {
-        "class_label": "PNEUMONIA VIRAL",
-        "label": 2,
-        "probability": 0.029999999329447746
-      }
+    "all_predictions": [
+      { "class_label": "NORMAL", "label": 0, "probability": 1.0 },
+      { "class_label": "PNEUMONIA BACTERIA", "label": 1, "probability": 0.0 },
+      { "class_label": "PNEUMONIA VIRAL", "label": 2, "probability": 0.0 }
     ],
-    "probability": 0.9700000286102295
+    "top_prediction": {
+      "class_label": "NORMAL",
+      "label": 0,
+      "probability": 1.0
+    }
   },
   "success": true
 }
