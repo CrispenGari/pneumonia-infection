@@ -3,6 +3,7 @@ import { COLORS, FONTS } from "../../../constants";
 import { Classifier, History, Results } from "../../../screens/app/home";
 import { HomeTabStacksParamList } from "../../../params";
 import { useSettingsStore } from "../../../store";
+import { useMediaQuery } from "../../../hooks";
 
 const Stack = createStackNavigator<HomeTabStacksParamList>();
 
@@ -10,6 +11,10 @@ export const HomeStack = () => {
   const {
     settings: { theme },
   } = useSettingsStore();
+
+  const {
+    dimension: { width },
+  } = useMediaQuery();
   return (
     <Stack.Navigator
       initialRouteName="Classifier"
@@ -18,7 +23,7 @@ export const HomeStack = () => {
           shadowOpacity: 0,
           elevation: 0,
           borderBottomColor: "transparent",
-          height: 80,
+          height: width < 600 ? 100 : 80,
           backgroundColor:
             theme === "dark" ? COLORS.dark.primary : COLORS.light.primary,
         },

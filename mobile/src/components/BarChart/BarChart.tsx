@@ -43,13 +43,13 @@ const Bar: React.FunctionComponent<Props> = ({ predictions }) => {
         style={[
           styles.h1,
           {
-            fontSize: 25,
+            fontSize: 20,
             color: theme === "dark" ? COLORS.common.white : COLORS.common.black,
             letterSpacing: 1,
           },
         ]}
       >
-        Prediction Distribution
+        Diagnostic Distribution
       </Text>
       <BarChart
         style={{

@@ -45,7 +45,7 @@ class LeNet(nn.Module):
         return x
 
 
-print(" *   LOADING v1 MODEL")
+print(" *  LOADING v1 MODEL")
 pneumonia_lenet = LeNet(OUTPUT_DIM).to(device)
 pneumonia_lenet.load_state_dict(torch.load(model_path, map_location=device))
 print("\n *  LOADING v1 MODEL COMPLETE")

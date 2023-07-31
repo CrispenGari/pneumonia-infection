@@ -8,12 +8,16 @@ import { AntDesign } from "@expo/vector-icons";
 
 import React from "react";
 import { useSettingsStore } from "../../store";
+import { useMediaQuery } from "../../hooks";
 const Tab = createBottomTabNavigator<AppParamList>();
 
 export const AppTabs = () => {
   const {
     settings: { theme },
   } = useSettingsStore();
+  const {
+    dimension: { width },
+  } = useMediaQuery();
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -28,7 +32,7 @@ export const AppTabs = () => {
           backgroundColor:
             theme === "dark" ? COLORS.dark.primary : COLORS.light.primary,
           paddingVertical: 10,
-          height: 60,
+          height: width < 600 ? 80 : 60,
           width: "auto",
         },
         tabBarShowLabel: false,

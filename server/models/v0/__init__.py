@@ -39,7 +39,7 @@ class MLP(nn.Module):
         return x
 
 
-print(" *   LOADING v0 MODEL")
+print(" *  LOADING v0 MODEL")
 pneumonia_mpl = MLP(INPUT_DIM, OUTPUT_DIM, dropout).to(device)
 pneumonia_mpl.load_state_dict(torch.load(model_path, map_location=device))
 print("\n *  LOADING v0 MODEL COMPLETE")
