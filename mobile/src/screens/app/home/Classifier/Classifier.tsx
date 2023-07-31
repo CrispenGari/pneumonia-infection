@@ -13,6 +13,7 @@ import { ReactNativeFile } from "apollo-upload-client";
 import { PredictionResponse } from "../../../../types";
 import { HomeTabStacksNavProps } from "../../../../params";
 import { MaterialIcons } from "@expo/vector-icons";
+import { v4 as uuidV4 } from "uuid";
 
 const Classifier: React.FunctionComponent<
   HomeTabStacksNavProps<"Classifier">
@@ -27,7 +28,7 @@ const Classifier: React.FunctionComponent<
             if (settings.haptics) {
               onImpact();
             }
-            navigation.navigate("History");
+            navigation.navigate("History", { from: "Home" });
           }}
           activeOpacity={0.7}
         >
@@ -79,14 +80,17 @@ const Classifier: React.FunctionComponent<
           const hist = {
             date: new Date(),
             result: data,
+            image: image.uri,
+            id: uuidV4(),
           };
           const _histories = await retrieve(KEYS.HISTORY);
           const _hist = _histories ? JSON.parse(_histories) : [];
-          const histories = [hist, _hist];
+          const histories = [hist, ..._hist];
           await store(KEYS.HISTORY, JSON.stringify(histories));
           navigation.navigate("Results", {
             results: JSON.stringify(data),
             image: image.uri,
+            from: "Home",
           });
         },
         onError(error, _variables, _context) {

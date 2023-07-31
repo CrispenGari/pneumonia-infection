@@ -3,6 +3,22 @@ export const KEYS = {
   HISTORY: "HISTORY",
 };
 
+export const relativeTimeObject = {
+  future: "in %s",
+  past: "%s",
+  s: "now",
+  m: "1m",
+  mm: "%dm",
+  h: "1h",
+  hh: "%dh",
+  d: "1d",
+  dd: "%dd",
+  M: "1M",
+  MM: "%dM",
+  y: "1y",
+  yy: "%dy",
+};
+
 export const models = [
   { name: "Multi Layer Perceptron (MLP)", version: "v0", id: 0 },
   { name: "LeNET", version: "v1", id: 1 },
@@ -22,6 +38,7 @@ export const COLORS = {
     tertiary: "#CBE4DE",
   },
   common: {
+    gray: "gray",
     red: "#FF3953",
     rating: "#FEC700",
     url: "#00A8F5",

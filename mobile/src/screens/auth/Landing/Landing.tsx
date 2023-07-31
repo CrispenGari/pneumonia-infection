@@ -141,7 +141,6 @@ const Landing: React.FunctionComponent<AuthNavProps<"Landing">> = ({
               new: false,
               theme,
             };
-
             await store(KEYS.APP_SETTINGS, JSON.stringify(s));
             setSettings(s);
           }}

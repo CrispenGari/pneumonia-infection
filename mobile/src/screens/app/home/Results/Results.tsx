@@ -19,7 +19,6 @@ const Results: React.FunctionComponent<HomeTabStacksNavProps<"Results">> = ({
   const {
     settings: { theme, ...settings },
   } = useSettingsStore();
-
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerTitle: results.predictions?.top_prediction.class_label ?? "Results",
@@ -30,7 +29,9 @@ const Results: React.FunctionComponent<HomeTabStacksNavProps<"Results">> = ({
             if (settings.haptics) {
               onImpact();
             }
-            navigation.navigate("History");
+            navigation.navigate("History", {
+              from: "Results",
+            });
           }}
           activeOpacity={0.7}
         >
@@ -42,10 +43,13 @@ const Results: React.FunctionComponent<HomeTabStacksNavProps<"Results">> = ({
         </TouchableOpacity>
       ),
       headerLeft: () => (
-        <AppStackBackButton label="Home" onPress={() => navigation.goBack()} />
+        <AppStackBackButton
+          label={route.params.from}
+          onPress={() => navigation.goBack()}
+        />
       ),
     });
-  }, [navigation, results, settings]);
+  }, [navigation, results, settings, route]);
 
   return (
     <ScrollView

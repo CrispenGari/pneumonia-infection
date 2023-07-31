@@ -26,10 +26,13 @@ export type AppNavProps<T extends keyof AppParamList> = {
 
 export type HomeTabStacksParamList = {
   Classifier: undefined;
-  History: undefined;
+  History: {
+    from: "Home" | "Results";
+  };
   Results: {
     results: string;
     image: string;
+    from: "Home" | "History";
   };
 };
 

@@ -16,7 +16,6 @@ const Loading: React.FunctionComponent<Props> = ({ title, withLogo }) => {
     settings: { theme },
   } = useSettingsStore();
 
-  console.log({ theme });
   return (
     <LinearGradient
       colors={

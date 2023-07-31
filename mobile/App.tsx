@@ -9,7 +9,7 @@ import Loading from "./src/components/Loading/Loading";
 import { Appearance, useColorScheme } from "react-native";
 import { useSettingsStore } from "./src/store";
 import { SettingsType } from "./src/types";
-import { store } from "./src/utils";
+import { retrieve, store } from "./src/utils";
 
 LogBox.ignoreLogs;
 LogBox.ignoreAllLogs();
@@ -34,6 +34,16 @@ const App = () => {
       };
       await store(KEYS.APP_SETTINGS, JSON.stringify(s));
       setSettings(s);
+    })();
+  }, [theme]);
+
+  React.useEffect(() => {
+    (async () => {
+      const ss = await retrieve(KEYS.APP_SETTINGS);
+      if (ss) {
+        const s: SettingsType = JSON.parse(ss);
+        setSettings(s);
+      }
     })();
   }, [theme]);
   if (!ready) return <Loading withLogo={true} title="Loading..." />;

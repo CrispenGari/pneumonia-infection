@@ -35,3 +35,10 @@ export type PredictionResponse = {
   };
   meta: MetaType;
 };
+
+export interface HistoryType {
+  date: Date;
+  result: PredictionResponse;
+  image: string;
+  id: string;
+}
