@@ -3,7 +3,7 @@ click==8.0.3
 colorama==0.4.4
 Flask==2.0.2
 Flask-Cors==3.0.10
-gevent==22.10.2
+gevent==23.7.0
 greenlet==2.0.2
 gunicorn==21.2.0
 itsdangerous==2.0.1
