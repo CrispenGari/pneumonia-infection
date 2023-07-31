@@ -1,7 +1,10 @@
+cffi==1.15.1
 click==8.0.3
 colorama==0.4.4
 Flask==2.0.2
 Flask-Cors==3.0.10
+gevent==23.7.0
+greenlet==2.0.2
 gunicorn==21.2.0
 itsdangerous==2.0.1
 Jinja2==3.0.3
@@ -9,8 +12,11 @@ MarkupSafe==2.0.1
 numpy==1.21.4
 packaging==23.1
 Pillow==8.4.0
+pycparser==2.21
 six==1.16.0
 torch==1.10.0
 torchvision==0.11.1
 typing_extensions==4.0.1
 Werkzeug==2.0.2
+zope.event==5.0
+zope.interface==6.0
