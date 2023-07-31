@@ -1,16 +1,45 @@
 import { ScrollView, TouchableOpacity, View, Text } from "react-native";
 import React from "react";
-import { COLORS, models, serverBaseURL } from "../../../../constants";
+import { COLORS, KEYS, models, serverBaseURL } from "../../../../constants";
 import { useSettingsStore } from "../../../../store";
 import Form from "../../../../components/Form/Form";
-import { generateRNFile, onImpact } from "../../../../utils";
+import { generateRNFile, onImpact, retrieve, store } from "../../../../utils";
 import ClassifierDate from "../../../../components/ClassifierDate/ClassifierDate";
 import FormImage from "../../../../components/FormImage/FormImage";
 import { styles } from "../../../../styles";
 import RippleLoadingIndicator from "../../../../components/RippleLoadingIndicator/RippleLoadingIndicator";
 import { useMutation } from "react-query";
 import { ReactNativeFile } from "apollo-upload-client";
-const Classifier = () => {
+import { PredictionResponse } from "../../../../types";
+import { HomeTabStacksNavProps } from "../../../../params";
+import { MaterialIcons } from "@expo/vector-icons";
+
+const Classifier: React.FunctionComponent<
+  HomeTabStacksNavProps<"Classifier">
+> = ({ navigation }) => {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: "Home",
+      headerRight: () => (
+        <TouchableOpacity
+          style={{ marginHorizontal: 20 }}
+          onPress={() => {
+            if (settings.haptics) {
+              onImpact();
+            }
+            navigation.navigate("History");
+          }}
+          activeOpacity={0.7}
+        >
+          <MaterialIcons
+            name="history"
+            size={24}
+            color={theme === "dark" ? COLORS.common.white : COLORS.common.black}
+          />
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
   const [model, setModel] = React.useState<string>(models[0].version);
   const {
     settings: { theme, ...settings },
@@ -35,7 +64,7 @@ const Classifier = () => {
         }
       );
       const data = await res.json();
-      return data;
+      return data as PredictionResponse;
     },
   });
   const diagnose = () => {
@@ -46,8 +75,19 @@ const Classifier = () => {
         model,
       },
       {
-        onSuccess: (data, _variables, _context) => {
-          console.log({ data });
+        onSuccess: async (data, _variables, _context) => {
+          const hist = {
+            date: new Date(),
+            result: data,
+          };
+          const _histories = await retrieve(KEYS.HISTORY);
+          const _hist = _histories ? JSON.parse(_histories) : [];
+          const histories = [hist, _hist];
+          await store(KEYS.HISTORY, JSON.stringify(histories));
+          navigation.navigate("Results", {
+            results: JSON.stringify(data),
+            image: image.uri,
+          });
         },
         onError(error, _variables, _context) {
           console.log({ error });
@@ -75,8 +115,8 @@ const Classifier = () => {
         setModel={setModel}
         setImage={setImage}
         diagnosing={diagnosing}
+        image={image}
       />
-
       <View
         style={{
           marginVertical: 10,

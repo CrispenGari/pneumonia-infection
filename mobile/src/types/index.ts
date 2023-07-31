@@ -29,7 +29,7 @@ export type MetaType = {
 export type PredictionResponse = {
   modelVersion: "v0" | "v1";
   success: boolean;
-  prediction?: {
+  predictions?: {
     top_prediction: PredictionType;
     all_predictions: PredictionType[];
   };

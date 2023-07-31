@@ -12,15 +12,25 @@ import { styles } from "../../styles";
 
 interface Props {
   diagnosing: boolean;
-  setImage: React.Dispatch<React.SetStateAction<any>>;
+  setImage: React.Dispatch<
+    React.SetStateAction<{
+      uri: string;
+      name: string;
+    } | null>
+  >;
   setModel: React.Dispatch<React.SetStateAction<string>>;
   model: string;
+  image: {
+    uri: string;
+    name: string;
+  } | null;
 }
 const Form: React.FunctionComponent<Props> = ({
   setImage,
   diagnosing,
   setModel,
   model,
+  image,
 }) => {
   const {
     settings: { theme },
@@ -61,7 +71,7 @@ const Form: React.FunctionComponent<Props> = ({
     if (!canceled) {
       setImage({
         uri: assets[0].uri,
-        name: assets[0].fileName,
+        name: assets[0].fileName || "none.jpg",
       });
     }
   };
@@ -101,7 +111,7 @@ const Form: React.FunctionComponent<Props> = ({
     if (!canceled) {
       setImage({
         uri: assets[0].uri,
-        name: assets[0].fileName,
+        name: assets[0].fileName || "none.jpg",
       });
     }
   };
@@ -184,71 +194,82 @@ const Form: React.FunctionComponent<Props> = ({
         </TouchableOpacity>
       </View>
 
-      <TypeWriter
-        style={[
-          styles.h1,
-          {
-            fontSize: 20,
-            marginBottom: 10,
-            marginTop: 20,
-            color: theme === "dark" ? COLORS.common.white : COLORS.common.black,
-          },
-        ]}
-        typing={1}
-        maxDelay={-50}
-      >
-        Select Model.
-      </TypeWriter>
+      {image ? (
+        <>
+          <TypeWriter
+            style={[
+              styles.h1,
+              {
+                fontSize: 20,
+                marginBottom: 10,
+                marginTop: 20,
+                color:
+                  theme === "dark" ? COLORS.common.white : COLORS.common.black,
+              },
+            ]}
+            typing={1}
+            maxDelay={-50}
+          >
+            Select Model.
+          </TypeWriter>
 
-      <Dropdown
-        placeholder="Select Model."
-        options={models}
-        optionLabel={"name"}
-        optionValue={"version"}
-        selectedValue={model}
-        isMultiple={false}
-        dropdownStyle={{
-          borderWidth: 0,
-          padding: 0,
-          margin: 0,
-          height: 10,
-          backgroundColor:
-            theme === "dark" ? COLORS.dark.tertiary : COLORS.light.tertiary,
-        }}
-        placeholderStyle={{ fontFamily: FONTS.regularBold, fontSize: 20 }}
-        onValueChange={(value: any) => setModel(value)}
-        labelStyle={{ fontFamily: FONTS.regularBold, fontSize: 20 }}
-        primaryColor={
-          theme === "dark" ? COLORS.dark.tertiary : COLORS.light.tertiary
-        }
-        dropdownHelperTextStyle={{
-          color: theme === "dark" ? COLORS.common.white : COLORS.common.black,
-          fontFamily: FONTS.regular,
-          fontSize: 15,
-        }}
-        helperText="Model version can be (v0 or v1) for MLP and LeNET respectively."
-        modalOptionsContainerStyle={{
-          padding: 10,
-          backgroundColor:
-            theme === "dark" ? COLORS.dark.main : COLORS.light.main,
-        }}
-        checkboxComponentStyles={{
-          checkboxSize: 10,
-          checkboxStyle: {
-            backgroundColor:
-              theme === "dark" ? COLORS.dark.secondary : COLORS.light.secondary,
-            borderRadius: 10,
-            padding: 5,
-            borderColor:
-              theme === "dark" ? COLORS.dark.tertiary : COLORS.light.tertiary,
-          },
-          checkboxLabelStyle: {
-            color: theme === "dark" ? COLORS.common.white : COLORS.common.black,
-            fontSize: 18,
-            fontFamily: FONTS.regular,
-          },
-        }}
-      />
+          <Dropdown
+            placeholder="Select Model."
+            options={models}
+            optionLabel={"name"}
+            optionValue={"version"}
+            selectedValue={model}
+            isMultiple={false}
+            dropdownStyle={{
+              borderWidth: 0,
+              padding: 0,
+              margin: 0,
+              height: 10,
+              backgroundColor:
+                theme === "dark" ? COLORS.dark.tertiary : COLORS.light.tertiary,
+            }}
+            placeholderStyle={{ fontFamily: FONTS.regularBold, fontSize: 20 }}
+            onValueChange={(value: any) => setModel(value)}
+            labelStyle={{ fontFamily: FONTS.regularBold, fontSize: 20 }}
+            primaryColor={
+              theme === "dark" ? COLORS.dark.tertiary : COLORS.light.tertiary
+            }
+            dropdownHelperTextStyle={{
+              color:
+                theme === "dark" ? COLORS.common.white : COLORS.common.black,
+              fontFamily: FONTS.regular,
+              fontSize: 15,
+            }}
+            helperText="Model version can be (v0 or v1) for MLP and LeNET respectively."
+            modalOptionsContainerStyle={{
+              padding: 10,
+              backgroundColor:
+                theme === "dark" ? COLORS.dark.main : COLORS.light.main,
+            }}
+            checkboxComponentStyles={{
+              checkboxSize: 10,
+              checkboxStyle: {
+                backgroundColor:
+                  theme === "dark"
+                    ? COLORS.dark.secondary
+                    : COLORS.light.secondary,
+                borderRadius: 10,
+                padding: 5,
+                borderColor:
+                  theme === "dark"
+                    ? COLORS.dark.tertiary
+                    : COLORS.light.tertiary,
+              },
+              checkboxLabelStyle: {
+                color:
+                  theme === "dark" ? COLORS.common.white : COLORS.common.black,
+                fontSize: 18,
+                fontFamily: FONTS.regular,
+              },
+            }}
+          />
+        </>
+      ) : null}
     </View>
   );
 };

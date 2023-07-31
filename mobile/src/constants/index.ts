@@ -1,5 +1,6 @@
 export const KEYS = {
   APP_SETTINGS: "APP_SETTINGS",
+  HISTORY: "HISTORY",
 };
 
 export const models = [
