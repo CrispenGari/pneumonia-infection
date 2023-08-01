@@ -66,6 +66,7 @@ const TableComponent: React.FC<Props> = ({ tableHead, title, tableData }) => {
             fontFamily: FONTS.regular,
             textAlign: "center",
             fontSize: 18,
+            color: theme === "dark" ? COLORS.common.white : COLORS.common.black,
           }}
         />
       </Table>

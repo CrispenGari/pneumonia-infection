@@ -36,7 +36,16 @@ const SettingItem: React.FunctionComponent<Props> = ({
       activeOpacity={0.7}
     >
       {Icon}
-      <Text style={[styles.p, { flex: 1, color: "black", marginLeft: 10 }]}>
+      <Text
+        style={[
+          styles.p,
+          {
+            flex: 1,
+            color: theme === "dark" ? COLORS.common.white : COLORS.common.black,
+            marginLeft: 10,
+          },
+        ]}
+      >
         {title}
       </Text>
     </TouchableOpacity>

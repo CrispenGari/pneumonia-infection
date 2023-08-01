@@ -1,7 +1,7 @@
 import { ScrollView, TouchableOpacity, View, Text } from "react-native";
 import React from "react";
 import { COLORS, KEYS, models, serverBaseURL } from "../../../../constants";
-import { useSettingsStore } from "../../../../store";
+import { useDiagnosingHistoryStore, useSettingsStore } from "../../../../store";
 import Form from "../../../../components/Form/Form";
 import {
   generateRNFile,
@@ -18,7 +18,7 @@ import { styles } from "../../../../styles";
 import RippleLoadingIndicator from "../../../../components/RippleLoadingIndicator/RippleLoadingIndicator";
 import { useMutation } from "react-query";
 import { ReactNativeFile } from "apollo-upload-client";
-import { PredictionResponse } from "../../../../types";
+import { DiagnosingHistoryType, PredictionResponse } from "../../../../types";
 import { HomeTabStacksNavProps } from "../../../../params";
 import { MaterialIcons } from "@expo/vector-icons";
 import { v4 as uuidV4 } from "uuid";
@@ -53,6 +53,8 @@ const Classifier: React.FunctionComponent<
   const {
     settings: { theme, ...settings },
   } = useSettingsStore();
+  const { diagnosingHistory, setDiagnosingHistory } =
+    useDiagnosingHistoryStore();
   const [image, setImage] = React.useState<{
     uri: string;
     name: string;
@@ -89,16 +91,21 @@ const Classifier: React.FunctionComponent<
       },
       {
         onSuccess: async (data, _variables, _context) => {
-          const hist = {
-            date: new Date(),
-            result: data,
-            image: image.uri,
-            id: uuidV4(),
-          };
-          const _histories = await retrieve(KEYS.HISTORY);
-          const _hist = _histories ? JSON.parse(_histories) : [];
-          const histories = [hist, ..._hist];
-          await store(KEYS.HISTORY, JSON.stringify(histories));
+          if (settings.historyEnabled) {
+            const hist: DiagnosingHistoryType = {
+              date: new Date(),
+              result: data,
+              image: image.uri,
+              id: uuidV4(),
+            };
+            const _histories = await retrieve(KEYS.DIAGNOSING_HISTORY);
+            const _hist: DiagnosingHistoryType[] = _histories
+              ? JSON.parse(_histories)
+              : diagnosingHistory;
+            const histories = [hist, ..._hist];
+            await store(KEYS.DIAGNOSING_HISTORY, JSON.stringify(histories));
+            setDiagnosingHistory(histories);
+          }
           if (settings.sound) {
             await stopDiagnosingSound();
             await playResultSound();
@@ -163,7 +170,7 @@ const Classifier: React.FunctionComponent<
               maxWidth: 400,
               flexDirection: "row",
               backgroundColor:
-                theme === "dark" ? COLORS.dark.tertiary : COLORS.dark.tertiary,
+                theme === "dark" ? COLORS.dark.tertiary : COLORS.light.tertiary,
             },
           ]}
         >
@@ -173,7 +180,7 @@ const Classifier: React.FunctionComponent<
               {
                 marginRight: diagnosing ? 10 : 0,
                 color:
-                  theme === "dark" ? COLORS.common.black : COLORS.common.black,
+                  theme === "dark" ? COLORS.common.black : COLORS.common.white,
               },
             ]}
           >
@@ -181,7 +188,7 @@ const Classifier: React.FunctionComponent<
           </Text>
           {diagnosing ? (
             <RippleLoadingIndicator
-              color={theme === "dark" ? COLORS.dark.main : COLORS.dark.main}
+              color={theme === "dark" ? COLORS.dark.main : COLORS.light.main}
               size={15}
             />
           ) : null}

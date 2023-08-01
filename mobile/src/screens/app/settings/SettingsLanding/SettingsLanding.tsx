@@ -1,8 +1,8 @@
-import { ScrollView, Linking } from "react-native";
+import { ScrollView, Linking, Alert } from "react-native";
 import React from "react";
 import { SettingsTabStacksNavProps } from "../../../../params";
-import { COLORS, KEYS } from "../../../../constants";
-import { useSettingsStore } from "../../../../store";
+import { APP_NAME, COLORS, KEYS } from "../../../../constants";
+import { useDiagnosingHistoryStore, useSettingsStore } from "../../../../store";
 import {
   MaterialCommunityIcons,
   Entypo,
@@ -28,6 +28,9 @@ const SettingsLanding: React.FunctionComponent<
     settings: { theme, ...settings },
     setSettings,
   } = useSettingsStore();
+  const { diagnosingHistory, setDiagnosingHistory } =
+    useDiagnosingHistoryStore();
+
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerTitle: "Settings",
@@ -190,9 +193,7 @@ const SettingsLanding: React.FunctionComponent<
         color={theme === "dark" ? COLORS.dark.tertiary : COLORS.light.tertiary}
         title="DISPLAY PREFERENCES"
       />
-
       <ThemeSettings />
-
       <Divider
         centered={false}
         color={theme === "dark" ? COLORS.dark.tertiary : COLORS.light.tertiary}
@@ -200,6 +201,96 @@ const SettingsLanding: React.FunctionComponent<
       />
 
       <LanguageSettings />
+
+      <Divider
+        centered={false}
+        color={theme === "dark" ? COLORS.dark.tertiary : COLORS.light.tertiary}
+        title="PNEUMONIA DIAGNOSING HISTORY"
+      />
+
+      <SettingItem
+        title={
+          !settings.historyEnabled
+            ? "Enable Diagnosing History"
+            : "Disable Diagnosing History"
+        }
+        Icon={
+          settings.historyEnabled ? (
+            <MaterialIcons
+              name="lock-clock"
+              size={24}
+              color={
+                theme === "dark" ? COLORS.common.white : COLORS.common.black
+              }
+            />
+          ) : (
+            <MaterialCommunityIcons
+              name="account-clock"
+              size={24}
+              color={
+                theme === "dark" ? COLORS.common.white : COLORS.common.black
+              }
+            />
+          )
+        }
+        onPress={async () => {
+          if (settings.haptics) {
+            onImpact();
+          }
+          const s: SettingsType = {
+            ...settings,
+            theme,
+            historyEnabled: !settings.historyEnabled,
+          };
+          await store(KEYS.APP_SETTINGS, JSON.stringify(s));
+          setSettings(s);
+        }}
+      />
+      <SettingItem
+        disabled={diagnosingHistory.length === 0}
+        title="Clear Diagnosing History"
+        Icon={
+          <MaterialIcons
+            name="clear-all"
+            size={24}
+            color={theme === "dark" ? COLORS.common.white : COLORS.common.black}
+          />
+        }
+        onPress={async () => {
+          if (settings.haptics) {
+            onImpact();
+          }
+          Alert.alert(
+            APP_NAME,
+            `Are you sure you want to clear (${diagnosingHistory.length}) Pneumonia Diagnosis History?`,
+            [
+              {
+                text: "Clear All",
+                style: "destructive",
+                onPress: async () => {
+                  if (settings.haptics) {
+                    onImpact();
+                  }
+                  await store(KEYS.DIAGNOSING_HISTORY, JSON.stringify([]));
+                  setDiagnosingHistory([]);
+                },
+              },
+              {
+                text: "Cancel",
+                style: "cancel",
+                onPress: () => {
+                  if (settings.haptics) {
+                    onImpact();
+                  }
+                },
+              },
+            ],
+            {
+              cancelable: false,
+            }
+          );
+        }}
+      />
 
       <Divider
         centered={false}
@@ -214,7 +305,7 @@ const SettingsLanding: React.FunctionComponent<
             onImpact();
           }
           await Linking.openURL(
-            "https://github.com/CrispenGari/invitee/issues"
+            "https://github.com/CrispenGari/pneumonia-infection/issues"
           );
         }}
       />

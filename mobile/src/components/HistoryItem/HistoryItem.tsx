@@ -113,7 +113,8 @@ const HistoryItem: React.FunctionComponent<Props> = ({
                 },
               ]}
             >
-              {result.predictions?.top_prediction?.class_label}
+              {result.predictions?.top_prediction?.class_label} • (
+              {result.modelVersion})
             </Text>
             <Text
               style={[styles.p, { fontSize: 14, color: COLORS.common.gray }]}

@@ -1,10 +1,10 @@
 import { ScrollView } from "react-native";
 import React from "react";
 import { COLORS, KEYS } from "../../../../constants";
-import { useSettingsStore } from "../../../../store";
+import { useDiagnosingHistoryStore, useSettingsStore } from "../../../../store";
 import { HomeTabStacksNavProps } from "../../../../params";
 import AppStackBackButton from "../../../../components/AppStackBackButton/AppStackBackButton";
-import { HistoryType } from "../../../../types";
+import { DiagnosingHistoryType } from "../../../../types";
 import { onImpact, retrieve, store } from "../../../../utils";
 import Divider from "../../../../components/Divider/Divider";
 import dayjs from "dayjs";
@@ -21,11 +21,13 @@ const History: React.FunctionComponent<HomeTabStacksNavProps<"History">> = ({
   const {
     settings: { theme, ...settings },
   } = useSettingsStore();
-  const [history, setHistory] = React.useState<HistoryType[]>([]);
+  const { diagnosingHistory, setDiagnosingHistory } =
+    useDiagnosingHistoryStore();
   React.useEffect(() => {
     (async () => {
-      const h = await retrieve(KEYS.HISTORY);
-      setHistory(h ? (JSON.parse(h) as HistoryType[]) : []);
+      const h = await retrieve(KEYS.DIAGNOSING_HISTORY);
+      const hh: DiagnosingHistoryType[] = h ? JSON.parse(h) : diagnosingHistory;
+      setDiagnosingHistory(hh);
     })();
   }, []);
   React.useLayoutEffect(() => {
@@ -37,7 +39,6 @@ const History: React.FunctionComponent<HomeTabStacksNavProps<"History">> = ({
             if (settings.haptics) {
               onImpact();
             }
-
             navigation.goBack();
           }}
         />
@@ -46,11 +47,9 @@ const History: React.FunctionComponent<HomeTabStacksNavProps<"History">> = ({
   }, [navigation, route]);
 
   const deleteHistoryItem = async (id: string) => {
-    const _histories = await retrieve(KEYS.HISTORY);
-    const _hist: HistoryType[] = _histories ? JSON.parse(_histories) : [];
-    const histories = _hist.filter((h) => h.id !== id);
-    await store(KEYS.HISTORY, JSON.stringify(histories));
-    setHistory(histories);
+    const histories = diagnosingHistory.filter((h) => h.id !== id);
+    await store(KEYS.DIAGNOSING_HISTORY, JSON.stringify(histories));
+    setDiagnosingHistory(histories);
   };
 
   return (
@@ -71,7 +70,7 @@ const History: React.FunctionComponent<HomeTabStacksNavProps<"History">> = ({
         color={COLORS.light.secondary}
       />
 
-      {history
+      {diagnosingHistory
         .map((hist) => {
           const date1 = dayjs();
           const date2 = dayjs();
@@ -82,6 +81,7 @@ const History: React.FunctionComponent<HomeTabStacksNavProps<"History">> = ({
         .filter((hist) => hist.days === 0)
         .map((hist) => (
           <HistoryItem
+            key={hist.id}
             navigation={navigation}
             hist={hist}
             deleteHistoryItem={deleteHistoryItem}
@@ -89,7 +89,7 @@ const History: React.FunctionComponent<HomeTabStacksNavProps<"History">> = ({
         ))}
 
       <Divider centered={true} title="OLD" color={COLORS.light.secondary} />
-      {history
+      {diagnosingHistory
         .map((hist) => {
           const date1 = dayjs();
           const date2 = dayjs();
@@ -100,6 +100,7 @@ const History: React.FunctionComponent<HomeTabStacksNavProps<"History">> = ({
         .filter((hist) => hist.days > 0)
         .map((hist) => (
           <HistoryItem
+            key={hist.id}
             navigation={navigation}
             hist={hist}
             deleteHistoryItem={deleteHistoryItem}

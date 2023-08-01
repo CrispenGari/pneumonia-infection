@@ -1,5 +1,4 @@
 import { NetInfoStateType } from "@react-native-community/netinfo";
-import { type ColorSchemeName } from "react-native";
 
 export type NetworkType = {
   type: NetInfoStateType | null;
@@ -7,12 +6,14 @@ export type NetworkType = {
   isInternetReachable: boolean | null;
 };
 
-export type ThemeType = ColorSchemeName;
+export type ThemeType = "dark" | "light" | "system";
+
 export type SettingsType = {
   haptics: boolean;
   sound: boolean;
   new: boolean;
   theme: ThemeType;
+  historyEnabled: boolean;
 };
 export interface PredictionType {
   class_label: string;
@@ -35,10 +36,9 @@ export type PredictionResponse = {
   };
   meta: MetaType;
 };
-
-export interface HistoryType {
+export type DiagnosingHistoryType = {
   date: Date;
   result: PredictionResponse;
   image: string;
   id: string;
-}
+};

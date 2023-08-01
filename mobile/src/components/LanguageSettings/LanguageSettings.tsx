@@ -5,8 +5,6 @@ import { COLORS, FONTS, languages } from "../../constants";
 import { useSettingsStore } from "../../store";
 
 const LanguageSettings = () => {
-  const [language, setLanguage] = React.useState("dark");
-
   const {
     settings: { theme },
   } = useSettingsStore();
@@ -16,31 +14,39 @@ const LanguageSettings = () => {
         placeholder="Change Theme."
         options={languages}
         optionLabel={"name"}
-        optionValue={"value"}
-        selectedValue={language}
+        optionValue={"code"}
+        selectedValue={languages[0].code}
         isMultiple={false}
         helperText="You can configure your default app language here."
         dropdownContainerStyle={{
           marginBottom: 0,
           maxWidth: 300,
         }}
+        selectedItemStyle={{
+          color: theme === "dark" ? COLORS.common.white : COLORS.common.black,
+          fontFamily: FONTS.regular,
+        }}
+        dropdownIconStyle={{ top: 15, right: 15 }}
         dropdownStyle={{
           borderWidth: 0,
-          padding: 0,
-          margin: 0,
-          minHeight: 30,
+          paddingVertical: 8,
+          paddingHorizontal: 20,
+          minHeight: 40,
           maxWidth: 300,
           backgroundColor:
-            theme === "dark" ? COLORS.dark.tertiary : COLORS.light.tertiary,
+            theme === "dark" ? COLORS.dark.primary : COLORS.light.primary,
         }}
-        placeholderStyle={{ fontFamily: FONTS.regularBold, fontSize: 20 }}
-        onValueChange={(value: string) => setLanguage(value)}
+        placeholderStyle={{
+          fontFamily: FONTS.regular,
+          fontSize: 18,
+        }}
+        onValueChange={(value: string) => console.log({ value })}
         labelStyle={{ fontFamily: FONTS.regularBold, fontSize: 20 }}
         primaryColor={
           theme === "dark" ? COLORS.dark.tertiary : COLORS.light.tertiary
         }
         dropdownHelperTextStyle={{
-          color: COLORS.common.black,
+          color: theme === "dark" ? COLORS.common.white : COLORS.common.black,
           fontFamily: FONTS.regular,
           fontSize: 15,
         }}

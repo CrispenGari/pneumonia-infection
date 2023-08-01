@@ -1,19 +1,23 @@
+import { ThemeType } from "../types";
+
 export const KEYS = {
   APP_SETTINGS: "APP_SETTINGS",
-  HISTORY: "HISTORY",
-  NEW_USER: "NEW_USER",
+  DIAGNOSING_HISTORY: "DIAGNOSING_HISTORY",
 };
 
-export const languages = [{ id: 0, name: "English", code: "en" }];
-
+export const languages = [
+  { id: 0, name: "English", code: "en" },
+  { id: 1, name: "Xhosa", code: "xh" },
+  { id: 2, name: "Zulu", code: "zu" },
+];
 export const themes: {
-  value: "dark" | "light" | "system";
+  value: ThemeType;
   id: number;
   name: string;
 }[] = [
   { id: 0, name: "Dark", value: "dark" },
   { id: 0, name: "Light", value: "light" },
-  { id: 0, name: "System", value: "system" },
+  // { id: 0, name: "System", value: "system" },
 ];
 
 export const relativeTimeObject = {

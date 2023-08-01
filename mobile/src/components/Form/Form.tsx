@@ -233,15 +233,16 @@ const Form: React.FunctionComponent<Props> = ({
             optionValue={"version"}
             selectedValue={model}
             isMultiple={false}
+            dropdownIconStyle={{ top: 15, right: 15 }}
             dropdownStyle={{
               borderWidth: 0,
-              padding: 0,
-              margin: 0,
-              minHeight: 30,
+              paddingVertical: 8,
+              paddingHorizontal: 20,
+              minHeight: 40,
               backgroundColor:
                 theme === "dark" ? COLORS.dark.tertiary : COLORS.light.tertiary,
             }}
-            placeholderStyle={{ fontFamily: FONTS.regularBold, fontSize: 20 }}
+            placeholderStyle={{ fontFamily: FONTS.regular, fontSize: 18 }}
             onValueChange={(value: any) => setModel(value)}
             labelStyle={{ fontFamily: FONTS.regularBold, fontSize: 20 }}
             primaryColor={
@@ -259,6 +260,12 @@ const Form: React.FunctionComponent<Props> = ({
               backgroundColor:
                 theme === "dark" ? COLORS.dark.main : COLORS.light.main,
             }}
+            selectedItemStyle={{
+              color:
+                theme === "dark" ? COLORS.common.black : COLORS.common.white,
+              fontSize: 18,
+              fontFamily: FONTS.regular,
+            }}
             checkboxComponentStyles={{
               checkboxSize: 10,
               checkboxStyle: {
@@ -273,6 +280,7 @@ const Form: React.FunctionComponent<Props> = ({
                     ? COLORS.dark.tertiary
                     : COLORS.light.tertiary,
               },
+
               checkboxLabelStyle: {
                 color:
                   theme === "dark" ? COLORS.common.white : COLORS.common.black,

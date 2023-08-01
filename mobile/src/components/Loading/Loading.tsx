@@ -9,9 +9,14 @@ import { useSettingsStore } from "../../store";
 interface Props {
   title: string;
   withLogo: boolean;
+  fontReady: boolean;
 }
 
-const Loading: React.FunctionComponent<Props> = ({ title, withLogo }) => {
+const Loading: React.FunctionComponent<Props> = ({
+  title,
+  withLogo,
+  fontReady,
+}) => {
   const {
     settings: { theme },
   } = useSettingsStore();
@@ -51,7 +56,14 @@ const Loading: React.FunctionComponent<Props> = ({ title, withLogo }) => {
           }}
         />
       )}
-      <Text style={[styles.h1, { fontSize: 20, marginTop: 20 }]}>{title}</Text>
+
+      {fontReady ? (
+        <Text style={[styles.h1, { fontSize: 20, marginTop: 20 }]}>
+          {title}
+        </Text>
+      ) : (
+        <Text style={{ fontSize: 20, marginTop: 20 }}>{title}</Text>
+      )}
     </LinearGradient>
   );
 };
