@@ -18,6 +18,7 @@
     "apollo-upload-client": "^17.0.0",
     "dayjs": "^1.11.9",
     "expo": "~49.0.5",
+    "expo-av": "~13.4.1",
     "expo-camera": "~13.4.2",
     "expo-font": "~11.4.0",
     "expo-haptics": "~12.4.0",

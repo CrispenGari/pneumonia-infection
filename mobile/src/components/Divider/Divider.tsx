@@ -20,6 +20,7 @@ const Divider: React.FunctionComponent<Props> = ({
         width: "100%",
         justifyContent: "space-between",
         alignItems: "center",
+        marginLeft: centered ? 0 : 10,
       }}
     >
       {centered ? (

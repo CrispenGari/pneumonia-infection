@@ -92,6 +92,9 @@ const Form: React.FunctionComponent<Props> = ({
             style: "default",
             text: "Allow Access to all Photos",
             onPress: async () => {
+              if (settings.haptics) {
+                onImpact();
+              }
               await ImagePicker.requestMediaLibraryPermissionsAsync();
               return;
             },
@@ -99,7 +102,11 @@ const Form: React.FunctionComponent<Props> = ({
           {
             style: "destructive",
             text: "CANCEL",
-            onPress: () => {},
+            onPress: () => {
+              if (settings.haptics) {
+                onImpact();
+              }
+            },
           },
         ]
       );
@@ -219,7 +226,6 @@ const Form: React.FunctionComponent<Props> = ({
           >
             Select Model.
           </TypeWriter>
-
           <Dropdown
             placeholder="Select Model."
             options={models}
@@ -231,7 +237,7 @@ const Form: React.FunctionComponent<Props> = ({
               borderWidth: 0,
               padding: 0,
               margin: 0,
-              height: 10,
+              minHeight: 30,
               backgroundColor:
                 theme === "dark" ? COLORS.dark.tertiary : COLORS.light.tertiary,
             }}

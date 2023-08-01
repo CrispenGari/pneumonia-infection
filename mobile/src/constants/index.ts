@@ -1,7 +1,20 @@
 export const KEYS = {
   APP_SETTINGS: "APP_SETTINGS",
   HISTORY: "HISTORY",
+  NEW_USER: "NEW_USER",
 };
+
+export const languages = [{ id: 0, name: "English", code: "en" }];
+
+export const themes: {
+  value: "dark" | "light" | "system";
+  id: number;
+  name: string;
+}[] = [
+  { id: 0, name: "Dark", value: "dark" },
+  { id: 0, name: "Light", value: "light" },
+  { id: 0, name: "System", value: "system" },
+];
 
 export const relativeTimeObject = {
   future: "in %s",

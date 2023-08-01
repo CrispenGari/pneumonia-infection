@@ -1,11 +1,62 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Haptics from "expo-haptics";
 import * as Updates from "expo-updates";
+import { Audio } from "expo-av";
 import { Alert } from "react-native";
 import { ReactNativeFile } from "apollo-upload-client";
 import * as mime from "react-native-mime-types";
 import { APP_NAME } from "../constants";
 import * as StoreReview from "expo-store-review";
+
+let diagnosingSound: Audio.Sound | undefined;
+let resultSound: Audio.Sound | undefined;
+
+export const onImpact = () => Haptics.impactAsync();
+export const onNotification = () => Haptics.notificationAsync();
+
+export const playDiagnosingSound = async () => {
+  const { sound: s, status } = await Audio.Sound.createAsync(
+    require("../../assets/sounds/diagnosing.wav"),
+    {
+      shouldPlay: true,
+      isLooping: true,
+      isMuted: false,
+    }
+  );
+  if (status.isLoaded) {
+    diagnosingSound = s;
+  }
+  if (!!diagnosingSound) {
+    await diagnosingSound.playAsync().catch((err) => console.log(err));
+  }
+};
+
+export const playResultSound = async () => {
+  const { sound: s, status } = await Audio.Sound.createAsync(
+    require("../../assets/sounds/results.wav"),
+    {
+      shouldPlay: true,
+      isLooping: false,
+      isMuted: false,
+    }
+  );
+  if (status.isLoaded) {
+    resultSound = s;
+  }
+  if (!!resultSound) {
+    await resultSound.playAsync().catch((err) => console.log(err));
+  }
+};
+export const stopDiagnosingSound = async () => {
+  if (!!diagnosingSound) {
+    await diagnosingSound.pauseAsync();
+  }
+};
+export const stopResultSound = async () => {
+  if (!!resultSound) {
+    await resultSound.pauseAsync();
+  }
+};
 
 export const rateApp = async () => {
   const available = await StoreReview.isAvailableAsync();
@@ -58,9 +109,6 @@ export const retrieve = async (key: string): Promise<string | null> => {
     return null;
   }
 };
-
-export const onImpact = () => Haptics.impactAsync();
-export const onNotification = () => Haptics.notificationAsync();
 
 export const onFetchUpdateAsync = async () => {
   try {

@@ -176,20 +176,41 @@ const Landing: React.FunctionComponent<AuthNavProps<"Landing">> = ({
             flexWrap: "wrap",
             alignItems: "center",
             justifyContent: "center",
+            maxWidth: 500,
           }}
         >
           <Text style={[styles.p]}>
             By using our AI Tool you are automatically accepting
           </Text>
           <TouchableOpacity activeOpacity={0.7}>
-            <Text style={[styles.p, { color: COLORS.common.url }]}>
+            <Text
+              style={[
+                styles.p,
+                {
+                  textDecorationStyle: "solid",
+                  textDecorationLine: "underline",
+                  color:
+                    theme === "dark" ? COLORS.common.url : COLORS.common.white,
+                },
+              ]}
+            >
               {" "}
               Terms and Conditions
             </Text>
           </TouchableOpacity>
           <Text style={[styles.p]}> and you are agreeing with our</Text>
           <TouchableOpacity activeOpacity={0.7}>
-            <Text style={[styles.p, { color: COLORS.common.url }]}>
+            <Text
+              style={[
+                styles.p,
+                {
+                  textDecorationStyle: "solid",
+                  textDecorationLine: "underline",
+                  color:
+                    theme === "dark" ? COLORS.common.url : COLORS.common.white,
+                },
+              ]}
+            >
               {" "}
               Privacy Policy.
             </Text>

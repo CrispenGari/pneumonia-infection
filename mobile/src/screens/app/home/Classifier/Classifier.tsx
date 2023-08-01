@@ -3,7 +3,15 @@ import React from "react";
 import { COLORS, KEYS, models, serverBaseURL } from "../../../../constants";
 import { useSettingsStore } from "../../../../store";
 import Form from "../../../../components/Form/Form";
-import { generateRNFile, onImpact, retrieve, store } from "../../../../utils";
+import {
+  generateRNFile,
+  onImpact,
+  playDiagnosingSound,
+  playResultSound,
+  retrieve,
+  stopDiagnosingSound,
+  store,
+} from "../../../../utils";
 import ClassifierDate from "../../../../components/ClassifierDate/ClassifierDate";
 import FormImage from "../../../../components/FormImage/FormImage";
 import { styles } from "../../../../styles";
@@ -68,7 +76,11 @@ const Classifier: React.FunctionComponent<
       return data as PredictionResponse;
     },
   });
-  const diagnose = () => {
+  const diagnose = async () => {
+    if (settings.sound) {
+      await playDiagnosingSound();
+    }
+
     if (!image) return;
     mutateAsync(
       {
@@ -87,13 +99,20 @@ const Classifier: React.FunctionComponent<
           const _hist = _histories ? JSON.parse(_histories) : [];
           const histories = [hist, ..._hist];
           await store(KEYS.HISTORY, JSON.stringify(histories));
+          if (settings.sound) {
+            await stopDiagnosingSound();
+            await playResultSound();
+          }
           navigation.navigate("Results", {
             results: JSON.stringify(data),
             image: image.uri,
             from: "Home",
           });
         },
-        onError(error, _variables, _context) {
+        onError: async (error, _variables, _context) => {
+          if (settings.sound) {
+            await stopDiagnosingSound();
+          }
           console.log({ error });
         },
       }
