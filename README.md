@@ -2,12 +2,16 @@
 
 This is a simple `REST` api that is served to classify `pneumonia` given an X-ray image of a chest of a human beings. The following are expected results when the model does it's classification.
 
+<p align="center" width="100%">
+  <img src="/images/icon.png" width="100" alt="logo"/>
+</p>
+
 1. pneumonia bacteria
 2. pneumonia virus
 3. normal
 
 <p align="center" width="100%">
-<img src="/images/pneumonia.jpg" width="300" alt="logo"/>
+  <img src="/images/pneumonia.jpg" width="300" alt="logo"/>
 </p>
 
 ### Deployed

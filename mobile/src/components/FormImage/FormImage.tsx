@@ -118,7 +118,6 @@ const FormImage: React.FunctionComponent<Props> = ({
               height: 100,
               marginVertical: 30,
               resizeMode: "contain",
-              tintColor: COLORS.common.white,
             }}
           />
           <Text

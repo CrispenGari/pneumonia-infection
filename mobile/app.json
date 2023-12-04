@@ -1,29 +1,37 @@
 {
   "expo": {
-    "scheme": "mobile",
-    "name": "mobile",
-    "slug": "mobile",
+    "scheme": "Pneumonia Diagonizer",
+    "name": "Pneumonia Diagonizer",
+    "slug": "pneumonia_diagonizer",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/logo.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/logo.png",
+      "image": "./assets/icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/logo.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.crispen_dev.pneumonia_diagonizer"
     },
     "web": {
-      "favicon": "./assets/logo.png"
+      "favicon": "./assets/icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c0f49eeb-30e7-42d2-819f-8aa047c7b568"
+      }
     }
   }
 }

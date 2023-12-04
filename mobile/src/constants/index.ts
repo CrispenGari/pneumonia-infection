@@ -43,16 +43,16 @@ export const models = [
 export const serverBaseURL = "https://pc-djhy.onrender.com";
 export const COLORS = {
   light: {
-    main: "#FEF7DC",
-    primary: "#E6DDC6",
-    secondary: "#C2B8A3",
-    tertiary: "#A19882",
+    main: "#F5EFE6",
+    primary: "#E8DFCA",
+    secondary: "#AEBDCA",
+    tertiary: "#7895B2",
   },
   dark: {
-    main: "#2C3333",
-    primary: "#2E4F4F",
-    secondary: "#0E8388",
-    tertiary: "#CBE4DE",
+    main: "#213555",
+    primary: "#4F709C",
+    secondary: "#D8C4B6",
+    tertiary: "#F5EFE7",
   },
   common: {
     gray: "gray",
@@ -82,4 +82,4 @@ export const FONTS = {
 
 export const logo = require("../../assets/logo.png");
 
-export const APP_NAME = "<APP_NAME>";
+export const APP_NAME = "Pneumonia Diagonizer";
