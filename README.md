@@ -34,7 +34,9 @@ After you have downloaded the app you can follow the following steps to install 
 
 > The following demo video was tested on `iOS V.16` using an iphone `X`
 
-[![Demo](/videos/demo.mp4)](/videos/demo.mp4)
+https://github.com/CrispenGari/pneumonia-infection/assets/59051957/a8910cd6-bf02-4119-a353-23de73e8b2cf
+
+
 
 ### Deployed Server
 
