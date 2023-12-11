@@ -34,11 +34,7 @@ After you have downloaded the app you can follow the following steps to install 
 
 > The following demo video was tested on `iOS V.16` using an iphone `X`
 
-<p align="center">
-  <video width="200" controls>
-    <source src="videos/demo.mp4" type="video/mp4">
-  </video>
-</p>
+[!alt](videos/demo.mp4)
 
 ### Deployed Server
 
