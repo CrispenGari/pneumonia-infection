@@ -34,7 +34,7 @@ After you have downloaded the app you can follow the following steps to install 
 
 > The following demo video was tested on `iOS V.16` using an iphone `X`
 
-[!alt](videos/demo.mp4)
+![alt](videos/demo.mp4)
 
 ### Deployed Server
 
