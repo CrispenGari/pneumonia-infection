@@ -9,6 +9,7 @@ import Loading from "./src/components/Loading/Loading";
 import { useSettingsStore } from "./src/store";
 import { SettingsType } from "./src/types";
 import { retrieve } from "./src/utils";
+import { usePlatform } from "./src/hooks";
 
 LogBox.ignoreLogs;
 LogBox.ignoreAllLogs();
@@ -18,6 +19,7 @@ const App = () => {
     setSettings,
     settings: { theme },
   } = useSettingsStore();
+  const { os } = usePlatform();
   React.useEffect(() => {
     (async () => {
       const s = await retrieve(KEYS.APP_SETTINGS);
@@ -32,7 +34,13 @@ const App = () => {
   return (
     <View style={{ flex: 1 }}>
       <StatusBar
-        barStyle={theme === "light" ? "dark-content" : "light-content"}
+        barStyle={
+          os === "android"
+            ? "light-content"
+            : theme === "light"
+            ? "dark-content"
+            : "light-content"
+        }
       />
       <ReactQueryProvider>
         <Routes />

@@ -14,7 +14,33 @@ This is a simple `REST` api that is served to classify `pneumonia` given an X-ra
   <img src="/images/pneumonia.jpg" width="300" alt="logo"/>
 </p>
 
-### Deployed
+### Android `apk`
+
+You can download and install our app on android at [**here.**](https://expo.dev//accounts/crispen_dev/projects/pneumonia_diagonizer/builds/10925569-cbc6-49d2-9e83-8c3db1f4a2c3). Alternatively you can scan the following `QR Code` using your android phone. This will take you to the download page of our app.
+
+<p align="center" width="100%">
+  <img src="/images/code.jpg" width="200" alt="logo"/>
+</p>
+
+After you have downloaded the app you can follow the following steps to install it on your android phone.
+
+### How to install this our on Android
+
+- On devices running `Android 8.0` (API level 26) and higher, you must navigate to the `Install unknown apps system settings` screen to enable app installations from a particular location (i.e. the web browser you are downloading the app from).
+
+- On devices running Android `7.1.1 `(API level 25) and lower, you should enable the `Unknown sources system setting`, found in `Settings` > `Security` on your device.
+
+### App Demo video on `iOS`
+
+> The following demo video was tested on `iOS V.16` using an iphone `X`
+
+<p align="center">
+  <video width="200" controls>
+    <source src="videos/demo.mp4" type="video/mp4">
+  </video>
+</p>
+
+### Deployed Server
 
 The deployed version of the API can be found at [PC-API](https://pc-djhy.onrender.com/) where you can make classification requests to the server and get response.
 
