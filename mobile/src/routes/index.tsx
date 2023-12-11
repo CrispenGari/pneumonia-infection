@@ -13,6 +13,7 @@ const Routes = () => {
   const {
     settings: { new: isNew },
   } = useSettingsStore();
+
   React.useEffect(() => {
     const unsubscribe = NetInfo.addEventListener(
       ({ type, isInternetReachable, isConnected }) => {

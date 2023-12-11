@@ -1,15 +1,15 @@
 import { Text, ScrollView } from "react-native";
 import React from "react";
-import AppStackBackButton from "../../../../components/AppStackBackButton/AppStackBackButton";
-import { COLORS, FONTS } from "../../../../constants";
-import { SettingsTabStacksNavProps } from "../../../../params";
-import { useSettingsStore } from "../../../../store";
-import { styles } from "../../../../styles";
-import { onImpact } from "../../../../utils";
-import { useMediaQuery } from "../../../../hooks";
+import { AuthNavProps } from "../../../params";
+import AppStackBackButton from "../../../components/AppStackBackButton/AppStackBackButton";
+import { COLORS, FONTS } from "../../../constants";
+import { useSettingsStore } from "../../../store";
+import { styles } from "../../../styles";
+import { onImpact } from "../../../utils";
+import { useMediaQuery } from "../../../hooks";
 
-const PrivacyPolicy: React.FunctionComponent<
-  SettingsTabStacksNavProps<"PrivacyPolicy">
+const AuthPrivacyPolicy: React.FunctionComponent<
+  AuthNavProps<"AuthPrivacyPolicy">
 > = ({ navigation, route }) => {
   const { settings } = useSettingsStore();
   const {
@@ -463,4 +463,4 @@ const PrivacyPolicy: React.FunctionComponent<
   );
 };
 
-export default PrivacyPolicy;
+export default AuthPrivacyPolicy;

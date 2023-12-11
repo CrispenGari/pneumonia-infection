@@ -20,6 +20,7 @@ export const AppTabs = () => {
     dimension: { width },
   } = useMediaQuery();
   const { network } = useNetworkStore();
+
   React.useEffect(() => {
     if (!network.isInternetReachable && network.isInternetReachable !== null) {
       if (haptics) {

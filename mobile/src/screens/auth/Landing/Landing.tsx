@@ -182,7 +182,15 @@ const Landing: React.FunctionComponent<AuthNavProps<"Landing">> = ({
           <Text style={[styles.p]}>
             By using our AI Tool you are automatically accepting
           </Text>
-          <TouchableOpacity activeOpacity={0.7}>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => {
+              if (settings.haptics) {
+                onImpact();
+              }
+              navigation.navigate("AuthTermsOfUse", { from: "Landing" });
+            }}
+          >
             <Text
               style={[
                 styles.p,
@@ -199,7 +207,15 @@ const Landing: React.FunctionComponent<AuthNavProps<"Landing">> = ({
             </Text>
           </TouchableOpacity>
           <Text style={[styles.p]}> and you are agreeing with our</Text>
-          <TouchableOpacity activeOpacity={0.7}>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => {
+              if (settings.haptics) {
+                onImpact();
+              }
+              navigation.navigate("AuthPrivacyPolicy", { from: "Landing" });
+            }}
+          >
             <Text
               style={[
                 styles.p,

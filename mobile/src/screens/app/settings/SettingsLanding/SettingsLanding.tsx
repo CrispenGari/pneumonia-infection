@@ -168,7 +168,7 @@ const SettingsLanding: React.FunctionComponent<
           if (settings.haptics) {
             onImpact();
           }
-          navigation.navigate("TermsOfUse");
+          navigation.navigate("TermsOfUse", { from: "Settings" as any });
         }}
       />
       <SettingItem
@@ -184,7 +184,7 @@ const SettingsLanding: React.FunctionComponent<
           if (settings.haptics) {
             onImpact();
           }
-          navigation.navigate("PrivacyPolicy");
+          navigation.navigate("PrivacyPolicy", { from: "Settings" as any });
         }}
       />
 

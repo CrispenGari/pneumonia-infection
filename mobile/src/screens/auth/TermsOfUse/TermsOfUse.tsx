@@ -1,15 +1,16 @@
 import { Text, ScrollView } from "react-native";
 import React from "react";
-import AppStackBackButton from "../../../../components/AppStackBackButton/AppStackBackButton";
-import { SettingsTabStacksNavProps } from "../../../../params";
-import { styles } from "../../../../styles";
-import { COLORS, FONTS } from "../../../../constants";
-import { useSettingsStore } from "../../../../store";
-import { onImpact } from "../../../../utils";
-import { useMediaQuery } from "../../../../hooks";
 
-const TermsOfUse: React.FunctionComponent<
-  SettingsTabStacksNavProps<"TermsOfUse">
+import { AuthNavProps } from "../../../params";
+import AppStackBackButton from "../../../components/AppStackBackButton/AppStackBackButton";
+import { COLORS, FONTS } from "../../../constants";
+import { useSettingsStore } from "../../../store";
+import { styles } from "../../../styles";
+import { onImpact } from "../../../utils";
+import { useMediaQuery } from "../../../hooks";
+
+const AuthTermsOfUse: React.FunctionComponent<
+  AuthNavProps<"AuthTermsOfUse">
 > = ({ navigation, route }) => {
   const { settings } = useSettingsStore();
   const {
@@ -330,4 +331,4 @@ const TermsOfUse: React.FunctionComponent<
   );
 };
 
-export default TermsOfUse;
+export default AuthTermsOfUse;

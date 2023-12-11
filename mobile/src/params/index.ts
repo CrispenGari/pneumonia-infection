@@ -4,6 +4,10 @@ import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 
 export type AuthParamList = {
   Landing: undefined;
+  AuthPrivacyPolicy: {
+    from: keyof AuthParamList;
+  };
+  AuthTermsOfUse: { from: keyof AuthParamList };
 };
 
 export type AuthNavProps<T extends keyof AuthParamList> = {
@@ -45,8 +49,10 @@ export type HomeTabStacksNavProps<T extends keyof HomeTabStacksParamList> = {
 
 export type SettingsTabStacksParamList = {
   SettingsLanding: undefined;
-  PrivacyPolicy: undefined;
-  TermsOfUse: undefined;
+  PrivacyPolicy: {
+    from: keyof SettingsTabStacksParamList;
+  };
+  TermsOfUse: { from: keyof SettingsTabStacksParamList };
 };
 
 export type SettingsTabStacksNavProps<

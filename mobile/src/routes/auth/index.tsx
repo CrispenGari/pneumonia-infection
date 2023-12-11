@@ -1,6 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { Landing } from "../../screens/auth";
+import { Landing, AuthPrivacyPolicy, AuthTermsOfUse } from "../../screens/auth";
 import { AuthParamList } from "../../params";
+
 const Stack = createStackNavigator<AuthParamList>();
 export const AuthStack = () => {
   return (
@@ -11,6 +12,8 @@ export const AuthStack = () => {
       }}
     >
       <Stack.Screen name="Landing" component={Landing} />
+      <Stack.Screen name="AuthPrivacyPolicy" component={AuthPrivacyPolicy} />
+      <Stack.Screen name="AuthTermsOfUse" component={AuthTermsOfUse} />
     </Stack.Navigator>
   );
 };
