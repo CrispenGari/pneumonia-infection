@@ -1,7 +1,7 @@
 ### Pneumonia Detector
 
 <p align="center" width="100%">
-  <img src="/images/icon.png" width="50" alt="logo"/>
+  <img src="https://github.com/CrispenGari/pneumonia-infection/raw/main/images/icon.png" width="50" alt="logo"/>
 </p>
 
 We present our mobile application that consumes a `REST` api do to real time pneumonia predictions on chest X-ray images. Among the following images classes.
@@ -11,16 +11,18 @@ We present our mobile application that consumes a `REST` api do to real time pne
 3. normal
 
 <p align="center" width="100%">
-  <img src="/images/pneumonia.jpg" width="200" alt="logo"/>
+  <img src="https://github.com/CrispenGari/pneumonia-infection/raw/main/images/pneumonia.jpg" width="200" alt="logo"/>
 </p>
 
 #### Android `apk`
 
-You can download and install our app on android at [**here**](https://expo.dev//accounts/crispen_dev/projects/pneumonia_diagonizer/builds/10925569-cbc6-49d2-9e83-8c3db1f4a2c3). Alternatively you can scan the following `QR Code` using your android phone. This will take you to the download page of our app.
+You can download and install our app on android at [**here**](https://expo.dev//accounts/crispen_dev/projects/pneumonia_diagonizer/builds/787bdc16-90a0-4d5e-9d5a-59a5588ca41e). Alternatively you can scan the following `QR Code` using your android phone. This will take you to the download page of our app.
 
 <p align="center" width="100%">
-  <img src="/images/code.jpg" width="100" alt="logo"/>
+  <img src="https://github.com/CrispenGari/pneumonia-infection/raw/main/images/code.jpg" width="100" alt="qr"/>
 </p>
+
+> Link: https://expo.dev//accounts/crispen_dev/projects/pneumonia_diagonizer/builds/787bdc16-90a0-4d5e-9d5a-59a5588ca41e
 
 After you have downloaded the app you can follow the following steps to install it on your android phone.
 
@@ -37,19 +39,19 @@ You can use the `camera` option on the app to snap the following images of `X-ra
 ##### 1. normal image
 
 <p align="center" width="100%">
-  <img src="/images/normal.jpeg" width="200" alt="normal"/>
+  <img src="https://github.com/CrispenGari/pneumonia-infection/raw/main/images/normal.jpeg" width="200" alt="normal"/>
 </p>
 
 ##### 2. bacteria image
 
 <p align="center" width="100%">
-  <img src="/images/bacteria.jpeg" width="200" alt="normal"/>
+  <img src="https://github.com/CrispenGari/pneumonia-infection/raw/main/images/bacteria.jpeg" width="200" alt="bacteria"/>
 </p>
 
 ##### 3. virus image
 
 <p align="center" width="100%">
-  <img src="/images/virus.jpeg" width="200" alt="normal"/>
+  <img src="https://github.com/CrispenGari/pneumonia-infection/raw/main/images/virus.jpeg" width="200" alt="virus"/>
 </p>
 
 > 🙏🙏 Thank you for testing our app!!

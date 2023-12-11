@@ -1,6 +1,6 @@
 {
   "expo": {
-    "scheme": "Pneumonia Diagonizer",
+    "scheme": "Pneumonia_Diagonizer",
     "name": "Pneumonia Diagonizer",
     "slug": "pneumonia_diagonizer",
     "version": "1.0.0",
@@ -12,9 +12,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },

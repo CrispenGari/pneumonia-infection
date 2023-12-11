@@ -16,7 +16,7 @@ This is a simple `REST` api that is served to classify `pneumonia` given an X-ra
 
 ### Android `apk`
 
-You can download and install our app on android at [**here.**](https://expo.dev//accounts/crispen_dev/projects/pneumonia_diagonizer/builds/10925569-cbc6-49d2-9e83-8c3db1f4a2c3). Alternatively you can scan the following `QR Code` using your android phone. This will take you to the download page of our app.
+You can download and install our app on android at [**here.**](https://expo.dev//accounts/crispen_dev/projects/pneumonia_diagonizer/builds/787bdc16-90a0-4d5e-9d5a-59a5588ca41e). Alternatively you can scan the following `QR Code` using your android phone. This will take you to the download page of our app.
 
 <p align="center" width="100%">
   <img src="/images/code.jpg" width="200" alt="logo"/>
@@ -35,8 +35,6 @@ After you have downloaded the app you can follow the following steps to install 
 > The following demo video was tested on `iOS V.16` using an iphone `X`
 
 https://github.com/CrispenGari/pneumonia-infection/assets/59051957/a8910cd6-bf02-4119-a353-23de73e8b2cf
-
-
 
 ### Deployed Server
 
