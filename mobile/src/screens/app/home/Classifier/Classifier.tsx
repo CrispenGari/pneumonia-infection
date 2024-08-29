@@ -1,4 +1,4 @@
-import { ScrollView, TouchableOpacity, View, Text } from "react-native";
+import { ScrollView, TouchableOpacity, View, Text, Alert } from "react-native";
 import React from "react";
 import { COLORS, KEYS, models, serverBaseURL } from "../../../../constants";
 import { useDiagnosingHistoryStore, useSettingsStore } from "../../../../store";
@@ -21,8 +21,6 @@ import { ReactNativeFile } from "apollo-upload-client";
 import { DiagnosingHistoryType, PredictionResponse } from "../../../../types";
 import { HomeTabStacksNavProps } from "../../../../params";
 import { MaterialIcons } from "@expo/vector-icons";
-import { v4 as uuidV4 } from "uuid";
-
 const Classifier: React.FunctionComponent<
   HomeTabStacksNavProps<"Classifier">
 > = ({ navigation }) => {
@@ -79,11 +77,10 @@ const Classifier: React.FunctionComponent<
     },
   });
   const diagnose = async () => {
+    if (!image) return;
     if (settings.sound) {
       await playDiagnosingSound();
     }
-
-    if (!image) return;
     mutateAsync(
       {
         image: generateRNFile({ name: image.name, uri: image.uri }),
@@ -92,12 +89,13 @@ const Classifier: React.FunctionComponent<
       {
         onSuccess: async (data, _variables, _context) => {
           if (settings.historyEnabled) {
-            const hist: DiagnosingHistoryType = {
+            const hist = {
               date: new Date(),
               result: data,
               image: image.uri,
-              id: uuidV4(),
+              id: Math.random().toString().slice(3),
             };
+
             const _histories = await retrieve(KEYS.DIAGNOSING_HISTORY);
             const _hist: DiagnosingHistoryType[] = _histories
               ? JSON.parse(_histories)
@@ -116,11 +114,11 @@ const Classifier: React.FunctionComponent<
             from: "Home",
           });
         },
-        onError: async (error, _variables, _context) => {
+        onError: async (error: any, _variables, _context) => {
           if (settings.sound) {
             await stopDiagnosingSound();
           }
-          console.log({ error });
+          Alert.alert("Error", error.message);
         },
       }
     );

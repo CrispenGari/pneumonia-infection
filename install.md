@@ -16,13 +16,7 @@ We present our mobile application that consumes a `REST` api do to real time pne
 
 #### Android `apk`
 
-You can download and install our app on android at [**here**](https://expo.dev//accounts/crispen_dev/projects/pneumonia_diagonizer/builds/787bdc16-90a0-4d5e-9d5a-59a5588ca41e). Alternatively you can scan the following `QR Code` using your android phone. This will take you to the download page of our app.
-
-<p align="center" width="100%">
-  <img src="https://github.com/CrispenGari/pneumonia-infection/raw/main/images/code.jpg" width="100" alt="qr"/>
-</p>
-
-> Link: https://expo.dev//accounts/crispen_dev/projects/pneumonia_diagonizer/builds/787bdc16-90a0-4d5e-9d5a-59a5588ca41e
+You can download and install our app on android at [**here**](/apk/app.apk).
 
 After you have downloaded the app you can follow the following steps to install it on your android phone.
 

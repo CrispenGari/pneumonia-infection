@@ -16,11 +16,7 @@ This is a simple `REST` api that is served to classify `pneumonia` given an X-ra
 
 ### Android `apk`
 
-You can download and install our app on android at [**here.**](https://expo.dev//accounts/crispen_dev/projects/pneumonia_diagonizer/builds/787bdc16-90a0-4d5e-9d5a-59a5588ca41e). Alternatively you can scan the following `QR Code` using your android phone. This will take you to the download page of our app.
-
-<p align="center" width="100%">
-  <img src="/images/code.jpg" width="200" alt="logo"/>
-</p>
+You can download and install our app on android at [**here**](/apk/app.apk).
 
 After you have downloaded the app you can follow the following steps to install it on your android phone.
 

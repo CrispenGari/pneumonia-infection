@@ -1,6 +1,6 @@
 {
   "expo": {
-    "scheme": "Pneumonia_Diagonizer",
+    "scheme": ["pneumonia-diagonizer"],
     "name": "Pneumonia Diagonizer",
     "slug": "pneumonia_diagonizer",
     "version": "1.0.0",
@@ -28,8 +28,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "c0f49eeb-30e7-42d2-819f-8aa047c7b568"
+        "projectId": "ff966e73-447d-4bd3-8460-6e0d4ff011f2"
       }
-    }
+    },
+    "plugins": ["expo-font"]
   }
 }
